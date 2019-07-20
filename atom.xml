@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-07-20T08:08:07.736Z</updated>
+    <updated>2019-07-20T08:19:15.367Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io/"/>
     <link rel="self" href="https://bixiaopeng0.github.io//atom.xml"/>
@@ -11,11 +11,380 @@
     <icon>https://bixiaopeng0.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
     <entry>
+        <title type="html"><![CDATA[markdown语法]]></title>
+        <id>https://bixiaopeng0.github.io//post/markdown-yu-fa</id>
+        <link href="https://bixiaopeng0.github.io//post/markdown-yu-fa">
+        </link>
+        <updated>2019-04-28T08:13:30.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="序言">序言</h1>
+<p>​	前段时间接触过markdown这种轻量级标记语言，感觉用它写文章很棒，可以省去排版的时间，能让人更专注于文档的内容，大大简化在格式上的工作。不过现在用的还不熟，打算以后写博客都用markdown写，学会可以一劳永逸，接下来总结一些常用的markdown语法，供自己以后翻阅。</p>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="序言">序言</h1>
+<p>​	前段时间接触过markdown这种轻量级标记语言，感觉用它写文章很棒，可以省去排版的时间，能让人更专注于文档的内容，大大简化在格式上的工作。不过现在用的还不熟，打算以后写博客都用markdown写，学会可以一劳永逸，接下来总结一些常用的markdown语法，供自己以后翻阅。</p>
+<!--more-->
+<h1 id="markdown常用语法">markdown常用语法</h1>
+<h2 id="标题">标题</h2>
+<h3 id="1用标记">1.用#标记</h3>
+<p>在标题开头加上1~6个#，一次代表一级标题、二级标题...六级标题</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-18_211255.png" alt=""></p>
+<p>效果：</p>
+<h1 id="一级标题">一级标题</h1>
+<h3 id="三级标题">三级标题</h3>
+<h3 id="2-通过文字下方添加和-他们分别表示一级标题和二级标题">2、通过文字下方添加“=”和“-”，他们分别表示一级标题和二级标题</h3>
+<p>其中“=”和‘“-”只要大于等于一个就可以，貌似在Typora编辑器里不支持这种标记，我在在线编辑器里试过这种是可行的</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-18_213256.png" alt=""></p>
+<p>效果：</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-18_213305.png" alt=""></p>
+<h2 id="斜体">斜体</h2>
+<p>如果需要让文字变成斜体，只需要在文字首尾加上*即可</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-18_213943.png" alt=""></p>
+<p>效果：</p>
+<p><em>我是一个斜体</em></p>
+<h2 id="粗体">粗体</h2>
+<p>如果需要让文字编程粗体，只需要在文字首尾加上**即可</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-18_214519.png" alt=""></p>
+<p>效果：</p>
+<p><strong>加粗的文字</strong></p>
+<h2 id="删除线">删除线</h2>
+<p>如果需要让文字的中间加上删除线</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-18_215346.png" alt=""></p>
+<p>效果：</p>
+<p><s>删除线</s></p>
+<h2 id="换行">换行</h2>
+<p>第一行第二行</p>
+<h2 id="列表">列表</h2>
+<h3 id="无序列表">无序列表</h3>
+<p>在文字开头添加*，+，-，其中一种，并且需要和文字之间添加空格</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-19_074821.png" alt=""></p>
+<p>效果：</p>
+<ul>
+<li>列表1</li>
+<li>列表2</li>
+</ul>
+<h3 id="有序列表">有序列表</h3>
+<p>有序列表使用数字加英文句号表示，并且逗号和文字之间要有空格</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-19_075609.png" alt=""></p>
+<p>效果：</p>
+<ol>
+<li>table1</li>
+<li>table2</li>
+</ol>
+<h2 id="分割线">分割线</h2>
+<p>在行中使用三个及以上的*、-、_来建立一条分割线。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-19_080351.png" alt=""></p>
+<p>效果：</p>
+<hr>
+<hr>
+<hr>
+<h2 id="代码块">代码块</h2>
+<p>三个```加上使用语言，即可出现代码块</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-19_080955.png" alt=""></p>
+<p>效果：</p>
+<pre><code class="language-c">static void exit_test(const int quit_application) {
+    if (global_running_test) {
+        longjmp(global_run_test_env, 1);
+    } else if (quit_application) {
+        exit(-1);
+    }
+}
+</code></pre>
+<h2 id="脚注">脚注</h2>
+<p>平时写文章时如果涉及到读者陌生的词汇，需要用脚注来解释。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-19_081903.png" alt=""></p>
+<p>效果：</p>
+<p><a href="%E8%A7%A3%E9%87%8A%E8%84%9A%E6%B3%A81">^1</a>脚注1</p>
+<h2 id="链接">链接</h2>
+<p>[]里是描述文本，()里是链接地址</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-19_083006.png" alt=""></p>
+<p>效果：</p>
+<p>this is <a href="www.baidu.com">baidu</a> website.</p>
+<h2 id="图片">图片</h2>
+<p>图片比链接前面多了一个！,[]里放的文字是用来描述的图片的关键词，可以不加。另外图片链接的话，一般是现把图片传到图床上，然后复制链接，国内比较有名的网站七牛云。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2018-07-19_083727.png" alt=""></p>
+<p>效果</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/TIM%E5%9B%BE%E7%89%8720180210001317.jpg" alt=""></p>
+<h2 id="换行-2">换行</h2>
+<p>enter 是双换行
+shift+enter单换行</p>
+<h2 id="结束">结束</h2>
+<p>大概就这样了，以后用到新的再补充。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[暗通道去雾]]></title>
+        <id>https://bixiaopeng0.github.io//post/an-tong-dao-qu-wu</id>
+        <link href="https://bixiaopeng0.github.io//post/an-tong-dao-qu-wu">
+        </link>
+        <updated>2019-02-17T08:17:25.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="暗通道去雾">暗通道去雾</h1>
+<h2 id="序言">序言</h2>
+<p>毕业设计选了用fpga做图像处理，之前在做车牌识别的时候，碰巧发现做去雾处理的，发现这个蛮有意思的，当时考研没有时间呢，现在正好借毕设把这个想法实现一下。其中图像去雾处理，网上有好多方法，比较了一下，何恺明的暗通道去雾应该是效果最好的，后来的人也对他的算法进行了改进，基本能达到比较不错的结果。</p>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="暗通道去雾">暗通道去雾</h1>
+<h2 id="序言">序言</h2>
+<p>毕业设计选了用fpga做图像处理，之前在做车牌识别的时候，碰巧发现做去雾处理的，发现这个蛮有意思的，当时考研没有时间呢，现在正好借毕设把这个想法实现一下。其中图像去雾处理，网上有好多方法，比较了一下，何恺明的暗通道去雾应该是效果最好的，后来的人也对他的算法进行了改进，基本能达到比较不错的结果。</p>
+<!--more-->
+<h2 id="原理">原理</h2>
+<h3 id="暗通道先验理论">暗通道先验理论</h3>
+<p>暗通道图像就是三个颜色分量的最小值组成一副灰度图像，</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/2019-02-17_160713.png?q-sign-algorithm=sha1&amp;q-ak=AKID7yDqvpy6fT84L5RY99s3Aa5V3oCmfe4m&amp;q-sign-time=1550408958;1550410758&amp;q-key-time=1550408958;1550410758&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=ea8b51c96f156fd856ccea2da4d2c73cb860bc28&amp;x-cos-security-token=46bb6494b4d4a2b489dac965cc969b7c72724dd910001" alt=""></p>
+<p>对于没有雾的图像J_dark趋于零，这一结果是何博士分析了5000多张正常图片的暗通道结果，而对于有雾图像并不满足之一验证。</p>
+<p>#####公式</p>
+<p>在去雾处理中，下面去雾模型被广泛应用</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2019-02-17_162722.png?q-sign-algorithm=sha1&amp;q-ak=AKID8LhGrumQQ1ZEbIh7Dqq0cofTQeUMHa7E&amp;q-sign-time=1550409058;1550410858&amp;q-key-time=1550409058;1550410858&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=dd8d45457743455af59d11f1368d425e8589c4bb&amp;x-cos-security-token=0b0aa22673862f735f7c3d4904442bcf2e6c623b10001" alt=""></p>
+<p>其中I(x)代表输入的雾图，J(x)代表去雾后的图像，t(x)为透射图，A为大气参数。现在只有I(x)知道，想要求出来J（x），还要把tx,A求出来才可以</p>
+<p>对公式两边求最小值操作，因为正常图像的暗通道趋于零，所以可以化简为</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2019-02-17_163812.png?q-sign-algorithm=sha1&amp;q-ak=AKIDGj7TQTUgoVMBXcL60BJ5mBwlH5HUcwAr&amp;q-sign-time=1550409080;1550410880&amp;q-key-time=1550409080;1550410880&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=379fc9f2731e577ef0ccf7dfb00eb2bbb4a52bda&amp;x-cos-security-token=4a81740da7bff9a4b68e0be5482e8724c9992f0210001" alt=""></p>
+<p>因为在实际景物中存在一定雾气，因此在前面加入一个参数w，这个因子一般取0.95</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2019-02-17_163823.png?q-sign-algorithm=sha1&amp;q-ak=AKIDUOrbFTLazXSEj9UtABZAhpFe0WE0pfci&amp;q-sign-time=1550409124;1550410924&amp;q-key-time=1550409124;1550410924&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=8fc42281be3dfdced901456e2c17e1329ba081d1&amp;x-cos-security-token=17fbbb9349de21deb17579a3843953c6177d1eec10001" alt=""></p>
+<p>而大气参数A,可以根据暗通道求出，最后的去雾公式为</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2019-02-17_170039.png?q-sign-algorithm=sha1&amp;q-ak=AKIDwXWxuK2kNo7MoNHpdeWx6zyIhkDnwSS8&amp;q-sign-time=1550409148;1550410948&amp;q-key-time=1550409148;1550410948&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=4a547972513a26e23bdf7474f16408213f2a446e&amp;x-cos-security-token=9929c82600f243c1175a725c6657be552fa6bdd410001" alt=""></p>
+<p>为了防止J(x)过大超过阈值，tx不能太小，因此对tx设置一个最小值t0=0.1</p>
+<h2 id="opencv实现">opencv实现</h2>
+<h3 id="求暗通道">求暗通道</h3>
+<p>求三个通道中的最小值即可，用at遍历，然后输出为单通道图片,最后进行最小值滤波，最小值滤波在</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E6%9A%97%E9%80%9A%E9%81%93.png?q-sign-algorithm=sha1&amp;q-ak=AKID0MkcaDc229p2Fh2YUhnhOI4Vkj1b7OX6&amp;q-sign-time=1550408910;1550410710&amp;q-key-time=1550408910;1550410710&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=a8fbecaa564d13375dfb7117a2e4c09f2fb3f4ff&amp;x-cos-security-token=e283a10d42652c7609d002393de1e8b653d540f010001" alt=""></p>
+<pre><code class="language-c++">int FindDarkChannel(Mat* scr_img, Mat* dst_img)
+{
+	uchar r, g, b;
+	for (int row = 0; row &lt; scr_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; scr_img-&gt;cols; col++)
+		{
+			r = scr_img-&gt;at&lt;Vec3b&gt;(row, col)[0];
+			g = scr_img-&gt;at&lt;Vec3b&gt;(row, col)[1];
+			b = scr_img-&gt;at&lt;Vec3b&gt;(row, col)[2];
+			if (r &lt; g&amp;&amp;r &lt; b)
+			{
+				dst_img-&gt;at&lt;uchar&gt;(row,col) = r;
+			}
+			else if (g &lt; r&amp;&amp;g &lt; b)
+			{
+				dst_img-&gt;at&lt;uchar&gt;(row, col) = g;
+			}
+			else
+			{
+				dst_img-&gt;at&lt;uchar&gt;(row, col) = b;
+			}
+		}
+	}
+	return 0;
+}
+
+</code></pre>
+<h3 id="获取大气光值a">获取大气光值A</h3>
+<p>1、首先把暗通道分成一千份，然后找到这千分之一最亮的像素区域。</p>
+<p>2、从这块区域中找到最亮的点就是大气光强。</p>
+<p>分成1000份是为了防止把一些非天空区域的白色物体当成大气光值</p>
+<pre><code class="language-c++">int GetMosphereLight(Mat* dark_img, Mat* scr_img, int* A)
+{
+	int top_size = dark_img-&gt;cols*dark_img-&gt;rows / 1000;
+	//cout &lt;&lt; dark_img-&gt;cols*dark_img-&gt;rows &lt;&lt; endl;
+	//cout &lt;&lt; &quot;top_size::&quot; &lt;&lt; top_size &lt;&lt; endl;
+	int sum_pxiel[1010] = {0};  //多余的储存剩下的像素
+	int max_num = 0,cnt_num=0,cnt_pixel=0;//0开始
+
+	for (int row = 0; row &lt; dark_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; dark_img-&gt;cols; col++)
+		{
+			sum_pxiel[cnt_num] += dark_img-&gt;at&lt;uchar&gt;(row, col);
+			cnt_pixel++;
+			if (cnt_num == 0)
+				cout &lt;&lt; cnt_pixel &lt;&lt; endl;
+
+			if (cnt_pixel == top_size)
+			{
+				//cout &lt;&lt; &quot;cnt_num&quot; &lt;&lt; cnt_num &lt;&lt;&quot;  &quot;&lt;&lt;sum_pxiel[cnt_num]&lt;&lt; endl;
+				cnt_pixel = 0;
+				cnt_num++;
+
+			}
+		}
+	}
+	max_num = 0;
+
+	//debug
+	for (int i = 0; i &lt; 100; i++)
+	{
+		cout &lt;&lt; i &lt;&lt; &quot;   &quot; &lt;&lt; sum_pxiel[i] &lt;&lt; endl;
+	}
+
+	for (int i = 0; i &lt; 1000; i++)
+	{
+	
+		if (sum_pxiel[i] &gt; sum_pxiel[max_num])
+		{
+			max_num = i;
+		}
+	}
+	cout &lt;&lt; &quot;max_num         &quot; &lt;&lt; max_num &lt;&lt; endl;
+
+	int row = max_num * top_size / dark_img-&gt;cols;
+	int col = max_num * top_size % dark_img-&gt;cols;
+
+	cout &lt;&lt; &quot;row  &quot; &lt;&lt; row &lt;&lt; &quot;col  &quot; &lt;&lt; col &lt;&lt; endl;
+
+	int max_row = row, max_col = col;
+
+	for (int i = 0; i &lt; top_size; i++)
+	{
+		//cout &lt;&lt; &quot;i==&quot; &lt;&lt; i &lt;&lt; &quot;  &quot; &lt;&lt; endl;
+		int row_temp = row + i / dark_img-&gt;cols;
+		int col_temp = col + i % dark_img-&gt;cols;
+		if (dark_img-&gt;at&lt;uchar&gt;(row_temp,col_temp) &gt; dark_img-&gt;at&lt;uchar&gt;(max_row, max_col))
+		{
+			max_row = row_temp;
+			max_col = col_temp;
+		}
+
+	}
+
+	Mat a_img = scr_img-&gt;clone();
+	Point a_point;
+	a_point.x = max_col;
+	a_point.y = max_row;
+	circle(a_img, a_point, 10, (0, 255, 0),5);
+	imshow(&quot;mark大气光值&quot;, a_img);
+
+	for (int i = 0; i &lt; 3; i++)
+	{
+		A[i] = scr_img-&gt;at&lt;Vec3b&gt;(max_row, max_col)[i];
+	}
+
+	return 0;
+}
+
+</code></pre>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E5%A4%A7%E6%B0%94%E5%85%89%E5%80%BC.png?q-sign-algorithm=sha1&amp;q-ak=AKIDdT58EP6Adb6UoDkuq3MrLe2lG6a7S3XP&amp;q-sign-time=1550408811;1550410611&amp;q-key-time=1550408811;1550410611&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=ddc2ce0a9fbd6168c56265bb553e70be755b6337&amp;x-cos-security-token=10cb6250dcba2d0373167fcf2946ec8c476023a210001" alt=""></p>
+<h3 id="获取透射图">获取透射图</h3>
+<p>这个大气光值A是取得三个通道的平均值，这样可以加快运算速度，另外需要注意图像的类型</p>
+<pre><code class="language-c++">int GetTransmission(Mat* scr_img, Mat* trans_img, int* A, float w)
+{
+	Mat trans_temp = Mat(scr_img-&gt;rows, scr_img-&gt;cols, CV_32FC3);
+	float a_average = (float)(A[0] + A[1] + A[2]) / 3;
+	if (a_average &gt; 220)
+		a_average = 220;
+	cout &lt;&lt; &quot;average&quot; &lt;&lt; a_average &lt;&lt; endl;
+	for (int row = 0; row &lt; scr_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; scr_img-&gt;cols; col++)
+		{
+			for (int i = 0; i &lt; 3; i++)
+			{
+				trans_temp.at&lt;Vec3f&gt;(row, col)[i] = (float)scr_img-&gt;at&lt;Vec3b&gt;(row, col)[i] / a_average;
+			}
+		}
+	}
+	imshow(&quot;t_temp&quot;, trans_temp);
+
+	Mat dark_t_img = Mat(scr_img-&gt;size(), CV_32FC1);
+	FindDarkChannel_f(&amp;trans_temp, &amp;dark_t_img);
+	imshow(&quot;t暗通道&quot;, dark_t_img);
+	*trans_img = dark_t_img.clone();
+	MinFilter_f(&amp;dark_t_img, trans_img, 6);
+	imshow(&quot;t_min&quot;, *trans_img);
+
+	int a = 0;
+	for (int row = 0; row &lt; scr_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; scr_img-&gt;cols; col++)
+		{
+			if ((1 - w * trans_img-&gt;at&lt;float&gt;(row, col)) &lt; 0)
+			{
+				cout &lt;&lt; &quot;  ww&quot; &lt;&lt; endl;
+				trans_img-&gt;at&lt;float&gt;(row, col) = 0;
+			}
+			else
+				trans_img-&gt;at&lt;float&gt;(row, col) = 1 - w * trans_img-&gt;at&lt;float&gt;(row, col);
+			if (trans_img-&gt;at&lt;float&gt;(row, col) &lt; 0.1)
+			{
+				//cout &lt;&lt; a++ &lt;&lt; endl;
+				trans_img-&gt;at&lt;float&gt;(row, col) = 0.1;
+			}
+		}
+
+	}
+
+
+	return 0;
+}
+
+</code></pre>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E6%9C%AA%E5%AF%BC%E5%90%91%E6%BB%A4%E6%B3%A2%E9%80%8F%E5%B0%84%E5%9B%BE.png?q-sign-algorithm=sha1&amp;q-ak=AKIDeBLJdgObcWvlGq4wqazqioBEvcEKuytt&amp;q-sign-time=1550408785;1550410585&amp;q-key-time=1550408785;1550410585&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=f11b2d5a1a3fb2e68663e8df266ee5af3f77be9a&amp;x-cos-security-token=fc5c45145d48463dd50e5dd3c051f92d671fd2ec10001" alt=""></p>
+<h3 id="导向滤波">导向滤波</h3>
+<p>直接出来的透射图并不精细，用导向滤波后输出的透射图更加精细，导向滤波的引导图可以是灰度图，也可以是rgb图像。opencv里面有导向滤波的函数，但是需要经过编译后才可以使用，导向滤波的实现并不麻烦，这里可以自己实现</p>
+<pre><code class="language-c++">int GuideFilter(Mat* scr_img, Mat* guide_img, Mat* final_img, int radius, float e)
+{
+	Mat guide_conver = Mat(guide_img-&gt;size(), CV_32FC1);
+	guide_img-&gt;convertTo(guide_conver, CV_32FC1, 1.0 / 255);
+	
+	int size = radius * 2 + 1;
+	//1
+	Mat mean_i = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(guide_conver, mean_i, CV_32FC1, Size(size, size));
+	Mat mean_p = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(*scr_img, mean_p, CV_32FC1, Size(size, size));
+	Mat mean_ip = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(guide_conver.mul(*scr_img), mean_ip, CV_32FC1, Size(size, size));
+	Mat mean_ii = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(guide_conver.mul(guide_conver), mean_ii, CV_32FC1, Size(size, size));;
+
+	//2
+	Mat var_i = Mat(guide_img-&gt;size(), CV_32FC1);
+	var_i = mean_ii - mean_i.mul(mean_i);
+	Mat cov_ip = Mat(guide_img-&gt;size(), CV_32FC1);
+	cov_ip = mean_ip - mean_i.mul(mean_p);
+	//3
+	Mat a = Mat(guide_img-&gt;size(), CV_32FC1);
+	a = cov_ip / (var_i + e);
+	Mat b = Mat(guide_img-&gt;size(), CV_32FC1);
+	b = mean_p - a.mul(mean_i);
+	//4
+	Mat mean_a = Mat(guide_img-&gt;size(), CV_32FC1);
+	Mat mean_b = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(a, mean_a, CV_32FC1, Size(size, size));
+	boxFilter(b, mean_b, CV_32FC1, Size(size, size));
+	//5
+	*final_img = mean_a.mul(guide_conver) + mean_b;
+	return 0;
+}
+</code></pre>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E5%AF%BC%E5%90%91%E6%BB%A4%E6%B3%A2%E7%AE%97%E6%B3%95.png?q-sign-algorithm=sha1&amp;q-ak=AKIDZ31keL0udBHfW2Zw2wPM0jrCM1F5qKrv&amp;q-sign-time=1550408726;1550410526&amp;q-key-time=1550408726;1550410526&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=3bcf936b516ef8aebb63a7c99583e70a484902c4&amp;x-cos-security-token=677e9f4460011955f6fb7b236ef0f5656c17ab5810001" alt=""></p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E5%AF%BC%E5%90%91%E6%BB%A4%E6%B3%A2.png?q-sign-algorithm=sha1&amp;q-ak=AKID37IJFfEoSU66JdlDLfN0cDSxBSXta3ji&amp;q-sign-time=1550408753;1550410553&amp;q-key-time=1550408753;1550410553&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=ba4a3e100e809e9172cc96b074d1de60694a5b11&amp;x-cos-security-token=68d664244f467379c4b46fe0b7d4bf36217eb6ec10001" alt=""></p>
+<h3 id="恢复图像">恢复图像</h3>
+<p>这里需要注意的是，参与运算的图像有浮点型和整数型，整数型要归一化才可以和浮点型运算。</p>
+<pre><code class="language-c++">int RecoverPicture(Mat* scr_img, Mat* t_img, Mat* recover_img, int* A)
+{
+	float average = (float)(A[0] + A[1] + A[2]) / 3;
+	cout &lt;&lt;&quot;A&quot;&lt;&lt; average/255 &lt;&lt; endl;
+	if (average &gt; 220)
+		average = 220;
+	for (int row = 0; row &lt; scr_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; scr_img-&gt;cols; col++)
+		{
+			for (int i = 0; i &lt; 3; i++)
+			{
+				recover_img-&gt;at&lt;Vec3f&gt;(row, col)[i] = ((float)scr_img-&gt;at&lt;Vec3b&gt;(row, col)[i]/255 -average/255) / t_img-&gt;at&lt;float&gt;(row, col) + average /255;
+			}
+		}
+	}
+	return 0;
+}
+</code></pre>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E7%BB%93%E6%9E%9C.png?q-sign-algorithm=sha1&amp;q-ak=AKIDrzrQ6phIafnfI4dzhBt5SQEUmycUL2DJ&amp;q-sign-time=1550408693;1550410493&amp;q-key-time=1550408693;1550410493&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=736df773a1fe4c9fd3d8205e3a6bcb01463ec681&amp;x-cos-security-token=61298ad80dbf09dc974fd71dad7e35887c3b0de410001" alt=""></p>
+<h3 id="不足">不足</h3>
+<p>如果图像中，天空区域过亮或者具有大面积天空区域，去雾图片会出现色斑效应，看网上有人指出可能是t0的最小值为to，当大量t趋于一个值时就会出现色斑效应，另外如果大气光值找的不准确，色彩就会失真，这些问题等后期再解决。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E7%BC%BA%E7%82%B9.png?q-sign-algorithm=sha1&amp;q-ak=AKIDxNMBTFnufgykmq90SU4g7e1MBtnqJwZu&amp;q-sign-time=1550408467;1550410267&amp;q-key-time=1550408467;1550410267&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=478b17abe4434ed95de30ebd38a47b134efc27b3&amp;x-cos-security-token=28d672ceeaaaa65acdb159619f153aeff06efa4f10001" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[搜索技巧]]></title>
         <id>https://bixiaopeng0.github.io//post/sou-suo-ji-qiao</id>
         <link href="https://bixiaopeng0.github.io//post/sou-suo-ji-qiao">
         </link>
-        <updated>2019-07-20T07:50:33.000Z</updated>
+        <updated>2018-07-31T08:18:20.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="双引号完全匹配">双引号完全匹配</h2>
 <p>​	在关键词上加上双引号，这样搜素引擎只返回和关键词完全符合的搜素结果。</p>
 <p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/shuang.png" alt=""></p>
@@ -35,6 +404,56 @@
 <p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype.png" alt=""></p>
 <p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype1.png" alt=""></p>
 <p>另外上述搜素技巧可以组合使用哟。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2018电赛程序实现---电流信号检测装置]]></title>
+        <id>https://bixiaopeng0.github.io//post/2018-dian-sai-cheng-xu-shi-xian-dian-liu-xin-hao-jian-ce-zhuang-zhi</id>
+        <link href="https://bixiaopeng0.github.io//post/2018-dian-sai-cheng-xu-shi-xian-dian-liu-xin-hao-jian-ce-zhuang-zhi">
+        </link>
+        <updated>2018-07-27T08:18:52.000Z</updated>
+        <summary type="html"><![CDATA[<p>​	把程序主要分为三个部分，第一个部分是vga显示，第二个部分是ad7106的驱动程序，第三个部分是fft程序</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>​	把程序主要分为三个部分，第一个部分是vga显示，第二个部分是ad7106的驱动程序，第三个部分是fft程序</p>
+<!--more-->
+<h2 id="vga显示">vga显示</h2>
+<p>​	vga显示这部分是我队友写的，主要功能显示输入信号的频谱和正弦信号的频率，非正弦信号的谐波幅值，其实这个频谱是经过处理之后显示的，如果输入的是单一频率的正弦波，那么只显示一根谱线，假设输入的是谐波，那么只显示谐波对应频率下的谱线，本来是想把所有的频谱给显示出来的，但是由于vga分辨率是1440X900,fft变化点数是8000个点，屏幕分辨率不够，所以当时没有全部显示，显示效果下图所示：<img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/IMG_20180727_142329.jpg" alt=""></p>
+<h2 id="ad7606驱动">AD7606驱动</h2>
+<p>​	我们一开始采用的是ads828这个10bit70M采样率，但是这款ad有两个问题，测量10mv的信号时准确度低，原因在于利用的有效位少了，这个当时我们想了两种解决思路，第一种是100MA~1A的电流直接经过ad处理，10ma~100ma的电流先经过放大，然后再经过ad处理，这样ad的有效数据位就利用了起来。第二种方案是采用精度更高的ad，我们最后是采用的第二种思路。另一个是这个ad828在硬件设计是加入了运算放大器，导致他的输入电压和输出值并不是线性关系，不过这个可以通过软件补偿进行弥补，先测试100组数据，然后再通过线性拟合补偿。</p>
+<p>​	ad7606采用的是spi接口，当时是老师帮我们从网上下载了一份verilog程序，结果还挺好用的，节省了大量的调试时间。</p>
+<h2 id="fft">FFT</h2>
+<p>​	fft分为采样速率模块控制采样率，fifo控制不同的时钟域，fft出来的数据进行转换，最后利用转换出来的数据进行测频率和幅值。</p>
+<h3 id="ip核使用注意事项">ip核使用注意事项</h3>
+<ol>
+<li>ad输入进来的数据并不是实际电压值，如果要转换成幅度，需要将ad的数据量化成电压值。</li>
+<li>关于缩放因子：缩放因子最高位是1则将数据向左移动相应的位数，否则向右移动相应的位数。</li>
+<li>缩放完数据 x N/2是原始数据的幅值。</li>
+<li>ad产生的数据如果有直流分量要减去直流分量。</li>
+<li>fft在matlab仿真中采整数个周期出来的结果才正确，但是在实际工程中，采整数个周期对采样率要求比较严格，实际上只要采样的周期数量足够多的话，就算不是整数个周期，最终的误差影响很小。</li>
+<li>fft出来的结果不要最后一个点。</li>
+</ol>
+<h3 id="采样率">采样率</h3>
+<p>​	一开始我们是采用的4K采样率和4K个点，这样频率分辨率1Hz，但是经过我们后期分析，频率分辨率是0.5hz，所以后来又把变化点数提高到8k个点，根据F = Fs / N频率分辨率就变成了0.5hz。</p>
+<p>​	4k的采样率一开始是直接在ad驱动程序里设置成1/4k的延时，但是这样不准，ad信号出来时都会有一个busy信号的等待，因为这个时间不固定，所以实际出来的频率小于4khz，这样也会导致fft变换完数据的不准确。一开始，fft出来的结果，当频率变高时，幅值误差很大，我当时以为是采样率太低了，最高被测信号是1khz，4k采1khz，一个周期才测四个点，其实4k的采样率也能满足要求，因为我们变化的8K个点，已经可以恢复出原始信号。由于测试的产生的幅值数据不准，老师给我们提供了一个思路，先把ad7606提高到最高采样率200khz，先对被测数据进行过采样，然后用4k采用率进行抽取进行fft变化，如果大于频率大于800hz采用时域求幅值的方法，频率小于则采用频率测量的方法。当我采用过采样然后抽取的方法时，误打误撞，非常惊喜的发现求出来的数据全部都符合题目要求的精度。</p>
+<h3 id="fifo控制">FIFO控制</h3>
+<p>​	fft变化的时钟是50Mhz，采样时钟是4k，所以中间采样了一个异步fifo进行缓冲。</p>
+<h3 id="fft控制">FFT控制</h3>
+<p>​	fft里的数据都是有符号位，当时有效数据标志位开始时，对实部和虚部平方相加然后求根，然后通过缩放因子进行移位，对数据除N/2之后，ad数据转化之后就是实际的电压值。</p>
+<h3 id="测频">测频</h3>
+<p>​	fft设置的是8k个点，因为频谱是对称的，所以只测前4000个点即可。所测的频率的在谱上的幅值最大，所以进行比较大小，即可求出被测信号中能量最大的信号。</p>
+<h2 id="电赛学到的知识">电赛学到的知识</h2>
+<ol>
+<li>用excel统计大量数据，使用公式行计算求误差，进行拟合。</li>
+<li>学会了之前fft没有搞懂的地方，也就是ad转换数据部分。</li>
+</ol>
+<h2 id="经验总结">经验总结</h2>
+<ol>
+<li>题目下来几天后，也不知道自己在忙啥，感觉最题目还是理解的不到位，最后还是经过老师带着分析之后才搞懂的，搞懂题目才可以做题，要不然理解错了，做的都是无用功。</li>
+<li>从网上传出一份评分表，但是老师不一定完全按照评分表来评测数据。</li>
+<li>好几个组做一道题目，方案不要完全一样，起码显示可以改一下，一个用vga，另一个用led显示屏或者数码管。否则老师可能会压你分数。</li>
+<li>如果对评测要求不确定，可以准备两套方案，通过按键调整。</li>
+</ol>
+<p>​</p>
 ]]></content>
     </entry>
 </feed>

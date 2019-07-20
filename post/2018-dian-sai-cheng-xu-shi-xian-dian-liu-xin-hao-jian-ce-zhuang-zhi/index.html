@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>2018电赛程序实现---电流信号检测装置 | Gridea</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1563610744870">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://bixiaopeng0.github.io//styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://bixiaopeng0.github.io/">
+        <img src="https://bixiaopeng0.github.io//images/avatar.png?v=1563610744870" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://bixiaopeng0.github.io//atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">2018电赛程序实现---电流信号检测装置</h2>
+            <div class="post-date">2018-07-27</div>
+            
+              <div class="feature-container" style="background-image: url('https://bixiaopeng0.github.io//post-images/2018-dian-sai-cheng-xu-shi-xian-dian-liu-xin-hao-jian-ce-zhuang-zhi.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <p>​	把程序主要分为三个部分，第一个部分是vga显示，第二个部分是ad7106的驱动程序，第三个部分是fft程序</p>
+<!--more-->
+<h2 id="vga显示">vga显示</h2>
+<p>​	vga显示这部分是我队友写的，主要功能显示输入信号的频谱和正弦信号的频率，非正弦信号的谐波幅值，其实这个频谱是经过处理之后显示的，如果输入的是单一频率的正弦波，那么只显示一根谱线，假设输入的是谐波，那么只显示谐波对应频率下的谱线，本来是想把所有的频谱给显示出来的，但是由于vga分辨率是1440X900,fft变化点数是8000个点，屏幕分辨率不够，所以当时没有全部显示，显示效果下图所示：<img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/IMG_20180727_142329.jpg" alt=""></p>
+<h2 id="ad7606驱动">AD7606驱动</h2>
+<p>​	我们一开始采用的是ads828这个10bit70M采样率，但是这款ad有两个问题，测量10mv的信号时准确度低，原因在于利用的有效位少了，这个当时我们想了两种解决思路，第一种是100MA~1A的电流直接经过ad处理，10ma~100ma的电流先经过放大，然后再经过ad处理，这样ad的有效数据位就利用了起来。第二种方案是采用精度更高的ad，我们最后是采用的第二种思路。另一个是这个ad828在硬件设计是加入了运算放大器，导致他的输入电压和输出值并不是线性关系，不过这个可以通过软件补偿进行弥补，先测试100组数据，然后再通过线性拟合补偿。</p>
+<p>​	ad7606采用的是spi接口，当时是老师帮我们从网上下载了一份verilog程序，结果还挺好用的，节省了大量的调试时间。</p>
+<h2 id="fft">FFT</h2>
+<p>​	fft分为采样速率模块控制采样率，fifo控制不同的时钟域，fft出来的数据进行转换，最后利用转换出来的数据进行测频率和幅值。</p>
+<h3 id="ip核使用注意事项">ip核使用注意事项</h3>
+<ol>
+<li>ad输入进来的数据并不是实际电压值，如果要转换成幅度，需要将ad的数据量化成电压值。</li>
+<li>关于缩放因子：缩放因子最高位是1则将数据向左移动相应的位数，否则向右移动相应的位数。</li>
+<li>缩放完数据 x N/2是原始数据的幅值。</li>
+<li>ad产生的数据如果有直流分量要减去直流分量。</li>
+<li>fft在matlab仿真中采整数个周期出来的结果才正确，但是在实际工程中，采整数个周期对采样率要求比较严格，实际上只要采样的周期数量足够多的话，就算不是整数个周期，最终的误差影响很小。</li>
+<li>fft出来的结果不要最后一个点。</li>
+</ol>
+<h3 id="采样率">采样率</h3>
+<p>​	一开始我们是采用的4K采样率和4K个点，这样频率分辨率1Hz，但是经过我们后期分析，频率分辨率是0.5hz，所以后来又把变化点数提高到8k个点，根据F = Fs / N频率分辨率就变成了0.5hz。</p>
+<p>​	4k的采样率一开始是直接在ad驱动程序里设置成1/4k的延时，但是这样不准，ad信号出来时都会有一个busy信号的等待，因为这个时间不固定，所以实际出来的频率小于4khz，这样也会导致fft变换完数据的不准确。一开始，fft出来的结果，当频率变高时，幅值误差很大，我当时以为是采样率太低了，最高被测信号是1khz，4k采1khz，一个周期才测四个点，其实4k的采样率也能满足要求，因为我们变化的8K个点，已经可以恢复出原始信号。由于测试的产生的幅值数据不准，老师给我们提供了一个思路，先把ad7606提高到最高采样率200khz，先对被测数据进行过采样，然后用4k采用率进行抽取进行fft变化，如果大于频率大于800hz采用时域求幅值的方法，频率小于则采用频率测量的方法。当我采用过采样然后抽取的方法时，误打误撞，非常惊喜的发现求出来的数据全部都符合题目要求的精度。</p>
+<h3 id="fifo控制">FIFO控制</h3>
+<p>​	fft变化的时钟是50Mhz，采样时钟是4k，所以中间采样了一个异步fifo进行缓冲。</p>
+<h3 id="fft控制">FFT控制</h3>
+<p>​	fft里的数据都是有符号位，当时有效数据标志位开始时，对实部和虚部平方相加然后求根，然后通过缩放因子进行移位，对数据除N/2之后，ad数据转化之后就是实际的电压值。</p>
+<h3 id="测频">测频</h3>
+<p>​	fft设置的是8k个点，因为频谱是对称的，所以只测前4000个点即可。所测的频率的在谱上的幅值最大，所以进行比较大小，即可求出被测信号中能量最大的信号。</p>
+<h2 id="电赛学到的知识">电赛学到的知识</h2>
+<ol>
+<li>用excel统计大量数据，使用公式行计算求误差，进行拟合。</li>
+<li>学会了之前fft没有搞懂的地方，也就是ad转换数据部分。</li>
+</ol>
+<h2 id="经验总结">经验总结</h2>
+<ol>
+<li>题目下来几天后，也不知道自己在忙啥，感觉最题目还是理解的不到位，最后还是经过老师带着分析之后才搞懂的，搞懂题目才可以做题，要不然理解错了，做的都是无用功。</li>
+<li>从网上传出一份评分表，但是老师不一定完全按照评分表来评测数据。</li>
+<li>好几个组做一道题目，方案不要完全一样，起码显示可以改一下，一个用vga，另一个用led显示屏或者数码管。否则老师可能会压你分数。</li>
+<li>如果对评测要求不确定，可以准备两套方案，通过按键调整。</li>
+</ol>
+<p>​</p>
+
+            </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>

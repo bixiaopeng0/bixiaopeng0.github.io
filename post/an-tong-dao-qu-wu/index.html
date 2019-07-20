@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>暗通道去雾 | Gridea</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1563610744870">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://bixiaopeng0.github.io//styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://bixiaopeng0.github.io/">
+        <img src="https://bixiaopeng0.github.io//images/avatar.png?v=1563610744870" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://bixiaopeng0.github.io//atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">暗通道去雾</h2>
+            <div class="post-date">2019-02-17</div>
+            
+              <div class="feature-container" style="background-image: url('https://bixiaopeng0.github.io//post-images/an-tong-dao-qu-wu.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <h1 id="暗通道去雾">暗通道去雾</h1>
+<h2 id="序言">序言</h2>
+<p>毕业设计选了用fpga做图像处理，之前在做车牌识别的时候，碰巧发现做去雾处理的，发现这个蛮有意思的，当时考研没有时间呢，现在正好借毕设把这个想法实现一下。其中图像去雾处理，网上有好多方法，比较了一下，何恺明的暗通道去雾应该是效果最好的，后来的人也对他的算法进行了改进，基本能达到比较不错的结果。</p>
+<!--more-->
+<h2 id="原理">原理</h2>
+<h3 id="暗通道先验理论">暗通道先验理论</h3>
+<p>暗通道图像就是三个颜色分量的最小值组成一副灰度图像，</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/2019-02-17_160713.png?q-sign-algorithm=sha1&amp;q-ak=AKID7yDqvpy6fT84L5RY99s3Aa5V3oCmfe4m&amp;q-sign-time=1550408958;1550410758&amp;q-key-time=1550408958;1550410758&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=ea8b51c96f156fd856ccea2da4d2c73cb860bc28&amp;x-cos-security-token=46bb6494b4d4a2b489dac965cc969b7c72724dd910001" alt=""></p>
+<p>对于没有雾的图像J_dark趋于零，这一结果是何博士分析了5000多张正常图片的暗通道结果，而对于有雾图像并不满足之一验证。</p>
+<p>#####公式</p>
+<p>在去雾处理中，下面去雾模型被广泛应用</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2019-02-17_162722.png?q-sign-algorithm=sha1&amp;q-ak=AKID8LhGrumQQ1ZEbIh7Dqq0cofTQeUMHa7E&amp;q-sign-time=1550409058;1550410858&amp;q-key-time=1550409058;1550410858&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=dd8d45457743455af59d11f1368d425e8589c4bb&amp;x-cos-security-token=0b0aa22673862f735f7c3d4904442bcf2e6c623b10001" alt=""></p>
+<p>其中I(x)代表输入的雾图，J(x)代表去雾后的图像，t(x)为透射图，A为大气参数。现在只有I(x)知道，想要求出来J（x），还要把tx,A求出来才可以</p>
+<p>对公式两边求最小值操作，因为正常图像的暗通道趋于零，所以可以化简为</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2019-02-17_163812.png?q-sign-algorithm=sha1&amp;q-ak=AKIDGj7TQTUgoVMBXcL60BJ5mBwlH5HUcwAr&amp;q-sign-time=1550409080;1550410880&amp;q-key-time=1550409080;1550410880&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=379fc9f2731e577ef0ccf7dfb00eb2bbb4a52bda&amp;x-cos-security-token=4a81740da7bff9a4b68e0be5482e8724c9992f0210001" alt=""></p>
+<p>因为在实际景物中存在一定雾气，因此在前面加入一个参数w，这个因子一般取0.95</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2019-02-17_163823.png?q-sign-algorithm=sha1&amp;q-ak=AKIDUOrbFTLazXSEj9UtABZAhpFe0WE0pfci&amp;q-sign-time=1550409124;1550410924&amp;q-key-time=1550409124;1550410924&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=8fc42281be3dfdced901456e2c17e1329ba081d1&amp;x-cos-security-token=17fbbb9349de21deb17579a3843953c6177d1eec10001" alt=""></p>
+<p>而大气参数A,可以根据暗通道求出，最后的去雾公式为</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/2019-02-17_170039.png?q-sign-algorithm=sha1&amp;q-ak=AKIDwXWxuK2kNo7MoNHpdeWx6zyIhkDnwSS8&amp;q-sign-time=1550409148;1550410948&amp;q-key-time=1550409148;1550410948&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=4a547972513a26e23bdf7474f16408213f2a446e&amp;x-cos-security-token=9929c82600f243c1175a725c6657be552fa6bdd410001" alt=""></p>
+<p>为了防止J(x)过大超过阈值，tx不能太小，因此对tx设置一个最小值t0=0.1</p>
+<h2 id="opencv实现">opencv实现</h2>
+<h3 id="求暗通道">求暗通道</h3>
+<p>求三个通道中的最小值即可，用at遍历，然后输出为单通道图片,最后进行最小值滤波，最小值滤波在</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E6%9A%97%E9%80%9A%E9%81%93.png?q-sign-algorithm=sha1&amp;q-ak=AKID0MkcaDc229p2Fh2YUhnhOI4Vkj1b7OX6&amp;q-sign-time=1550408910;1550410710&amp;q-key-time=1550408910;1550410710&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=a8fbecaa564d13375dfb7117a2e4c09f2fb3f4ff&amp;x-cos-security-token=e283a10d42652c7609d002393de1e8b653d540f010001" alt=""></p>
+<pre><code class="language-c++">int FindDarkChannel(Mat* scr_img, Mat* dst_img)
+{
+	uchar r, g, b;
+	for (int row = 0; row &lt; scr_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; scr_img-&gt;cols; col++)
+		{
+			r = scr_img-&gt;at&lt;Vec3b&gt;(row, col)[0];
+			g = scr_img-&gt;at&lt;Vec3b&gt;(row, col)[1];
+			b = scr_img-&gt;at&lt;Vec3b&gt;(row, col)[2];
+			if (r &lt; g&amp;&amp;r &lt; b)
+			{
+				dst_img-&gt;at&lt;uchar&gt;(row,col) = r;
+			}
+			else if (g &lt; r&amp;&amp;g &lt; b)
+			{
+				dst_img-&gt;at&lt;uchar&gt;(row, col) = g;
+			}
+			else
+			{
+				dst_img-&gt;at&lt;uchar&gt;(row, col) = b;
+			}
+		}
+	}
+	return 0;
+}
+
+</code></pre>
+<h3 id="获取大气光值a">获取大气光值A</h3>
+<p>1、首先把暗通道分成一千份，然后找到这千分之一最亮的像素区域。</p>
+<p>2、从这块区域中找到最亮的点就是大气光强。</p>
+<p>分成1000份是为了防止把一些非天空区域的白色物体当成大气光值</p>
+<pre><code class="language-c++">int GetMosphereLight(Mat* dark_img, Mat* scr_img, int* A)
+{
+	int top_size = dark_img-&gt;cols*dark_img-&gt;rows / 1000;
+	//cout &lt;&lt; dark_img-&gt;cols*dark_img-&gt;rows &lt;&lt; endl;
+	//cout &lt;&lt; &quot;top_size::&quot; &lt;&lt; top_size &lt;&lt; endl;
+	int sum_pxiel[1010] = {0};  //多余的储存剩下的像素
+	int max_num = 0,cnt_num=0,cnt_pixel=0;//0开始
+
+	for (int row = 0; row &lt; dark_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; dark_img-&gt;cols; col++)
+		{
+			sum_pxiel[cnt_num] += dark_img-&gt;at&lt;uchar&gt;(row, col);
+			cnt_pixel++;
+			if (cnt_num == 0)
+				cout &lt;&lt; cnt_pixel &lt;&lt; endl;
+
+			if (cnt_pixel == top_size)
+			{
+				//cout &lt;&lt; &quot;cnt_num&quot; &lt;&lt; cnt_num &lt;&lt;&quot;  &quot;&lt;&lt;sum_pxiel[cnt_num]&lt;&lt; endl;
+				cnt_pixel = 0;
+				cnt_num++;
+
+			}
+		}
+	}
+	max_num = 0;
+
+	//debug
+	for (int i = 0; i &lt; 100; i++)
+	{
+		cout &lt;&lt; i &lt;&lt; &quot;   &quot; &lt;&lt; sum_pxiel[i] &lt;&lt; endl;
+	}
+
+	for (int i = 0; i &lt; 1000; i++)
+	{
+	
+		if (sum_pxiel[i] &gt; sum_pxiel[max_num])
+		{
+			max_num = i;
+		}
+	}
+	cout &lt;&lt; &quot;max_num         &quot; &lt;&lt; max_num &lt;&lt; endl;
+
+	int row = max_num * top_size / dark_img-&gt;cols;
+	int col = max_num * top_size % dark_img-&gt;cols;
+
+	cout &lt;&lt; &quot;row  &quot; &lt;&lt; row &lt;&lt; &quot;col  &quot; &lt;&lt; col &lt;&lt; endl;
+
+	int max_row = row, max_col = col;
+
+	for (int i = 0; i &lt; top_size; i++)
+	{
+		//cout &lt;&lt; &quot;i==&quot; &lt;&lt; i &lt;&lt; &quot;  &quot; &lt;&lt; endl;
+		int row_temp = row + i / dark_img-&gt;cols;
+		int col_temp = col + i % dark_img-&gt;cols;
+		if (dark_img-&gt;at&lt;uchar&gt;(row_temp,col_temp) &gt; dark_img-&gt;at&lt;uchar&gt;(max_row, max_col))
+		{
+			max_row = row_temp;
+			max_col = col_temp;
+		}
+
+	}
+
+	Mat a_img = scr_img-&gt;clone();
+	Point a_point;
+	a_point.x = max_col;
+	a_point.y = max_row;
+	circle(a_img, a_point, 10, (0, 255, 0),5);
+	imshow(&quot;mark大气光值&quot;, a_img);
+
+	for (int i = 0; i &lt; 3; i++)
+	{
+		A[i] = scr_img-&gt;at&lt;Vec3b&gt;(max_row, max_col)[i];
+	}
+
+	return 0;
+}
+
+</code></pre>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E5%A4%A7%E6%B0%94%E5%85%89%E5%80%BC.png?q-sign-algorithm=sha1&amp;q-ak=AKIDdT58EP6Adb6UoDkuq3MrLe2lG6a7S3XP&amp;q-sign-time=1550408811;1550410611&amp;q-key-time=1550408811;1550410611&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=ddc2ce0a9fbd6168c56265bb553e70be755b6337&amp;x-cos-security-token=10cb6250dcba2d0373167fcf2946ec8c476023a210001" alt=""></p>
+<h3 id="获取透射图">获取透射图</h3>
+<p>这个大气光值A是取得三个通道的平均值，这样可以加快运算速度，另外需要注意图像的类型</p>
+<pre><code class="language-c++">int GetTransmission(Mat* scr_img, Mat* trans_img, int* A, float w)
+{
+	Mat trans_temp = Mat(scr_img-&gt;rows, scr_img-&gt;cols, CV_32FC3);
+	float a_average = (float)(A[0] + A[1] + A[2]) / 3;
+	if (a_average &gt; 220)
+		a_average = 220;
+	cout &lt;&lt; &quot;average&quot; &lt;&lt; a_average &lt;&lt; endl;
+	for (int row = 0; row &lt; scr_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; scr_img-&gt;cols; col++)
+		{
+			for (int i = 0; i &lt; 3; i++)
+			{
+				trans_temp.at&lt;Vec3f&gt;(row, col)[i] = (float)scr_img-&gt;at&lt;Vec3b&gt;(row, col)[i] / a_average;
+			}
+		}
+	}
+	imshow(&quot;t_temp&quot;, trans_temp);
+
+	Mat dark_t_img = Mat(scr_img-&gt;size(), CV_32FC1);
+	FindDarkChannel_f(&amp;trans_temp, &amp;dark_t_img);
+	imshow(&quot;t暗通道&quot;, dark_t_img);
+	*trans_img = dark_t_img.clone();
+	MinFilter_f(&amp;dark_t_img, trans_img, 6);
+	imshow(&quot;t_min&quot;, *trans_img);
+
+	int a = 0;
+	for (int row = 0; row &lt; scr_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; scr_img-&gt;cols; col++)
+		{
+			if ((1 - w * trans_img-&gt;at&lt;float&gt;(row, col)) &lt; 0)
+			{
+				cout &lt;&lt; &quot;  ww&quot; &lt;&lt; endl;
+				trans_img-&gt;at&lt;float&gt;(row, col) = 0;
+			}
+			else
+				trans_img-&gt;at&lt;float&gt;(row, col) = 1 - w * trans_img-&gt;at&lt;float&gt;(row, col);
+			if (trans_img-&gt;at&lt;float&gt;(row, col) &lt; 0.1)
+			{
+				//cout &lt;&lt; a++ &lt;&lt; endl;
+				trans_img-&gt;at&lt;float&gt;(row, col) = 0.1;
+			}
+		}
+
+	}
+
+
+	return 0;
+}
+
+</code></pre>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E6%9C%AA%E5%AF%BC%E5%90%91%E6%BB%A4%E6%B3%A2%E9%80%8F%E5%B0%84%E5%9B%BE.png?q-sign-algorithm=sha1&amp;q-ak=AKIDeBLJdgObcWvlGq4wqazqioBEvcEKuytt&amp;q-sign-time=1550408785;1550410585&amp;q-key-time=1550408785;1550410585&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=f11b2d5a1a3fb2e68663e8df266ee5af3f77be9a&amp;x-cos-security-token=fc5c45145d48463dd50e5dd3c051f92d671fd2ec10001" alt=""></p>
+<h3 id="导向滤波">导向滤波</h3>
+<p>直接出来的透射图并不精细，用导向滤波后输出的透射图更加精细，导向滤波的引导图可以是灰度图，也可以是rgb图像。opencv里面有导向滤波的函数，但是需要经过编译后才可以使用，导向滤波的实现并不麻烦，这里可以自己实现</p>
+<pre><code class="language-c++">int GuideFilter(Mat* scr_img, Mat* guide_img, Mat* final_img, int radius, float e)
+{
+	Mat guide_conver = Mat(guide_img-&gt;size(), CV_32FC1);
+	guide_img-&gt;convertTo(guide_conver, CV_32FC1, 1.0 / 255);
+	
+	int size = radius * 2 + 1;
+	//1
+	Mat mean_i = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(guide_conver, mean_i, CV_32FC1, Size(size, size));
+	Mat mean_p = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(*scr_img, mean_p, CV_32FC1, Size(size, size));
+	Mat mean_ip = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(guide_conver.mul(*scr_img), mean_ip, CV_32FC1, Size(size, size));
+	Mat mean_ii = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(guide_conver.mul(guide_conver), mean_ii, CV_32FC1, Size(size, size));;
+
+	//2
+	Mat var_i = Mat(guide_img-&gt;size(), CV_32FC1);
+	var_i = mean_ii - mean_i.mul(mean_i);
+	Mat cov_ip = Mat(guide_img-&gt;size(), CV_32FC1);
+	cov_ip = mean_ip - mean_i.mul(mean_p);
+	//3
+	Mat a = Mat(guide_img-&gt;size(), CV_32FC1);
+	a = cov_ip / (var_i + e);
+	Mat b = Mat(guide_img-&gt;size(), CV_32FC1);
+	b = mean_p - a.mul(mean_i);
+	//4
+	Mat mean_a = Mat(guide_img-&gt;size(), CV_32FC1);
+	Mat mean_b = Mat(guide_img-&gt;size(), CV_32FC1);
+	boxFilter(a, mean_a, CV_32FC1, Size(size, size));
+	boxFilter(b, mean_b, CV_32FC1, Size(size, size));
+	//5
+	*final_img = mean_a.mul(guide_conver) + mean_b;
+	return 0;
+}
+</code></pre>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E5%AF%BC%E5%90%91%E6%BB%A4%E6%B3%A2%E7%AE%97%E6%B3%95.png?q-sign-algorithm=sha1&amp;q-ak=AKIDZ31keL0udBHfW2Zw2wPM0jrCM1F5qKrv&amp;q-sign-time=1550408726;1550410526&amp;q-key-time=1550408726;1550410526&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=3bcf936b516ef8aebb63a7c99583e70a484902c4&amp;x-cos-security-token=677e9f4460011955f6fb7b236ef0f5656c17ab5810001" alt=""></p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E5%AF%BC%E5%90%91%E6%BB%A4%E6%B3%A2.png?q-sign-algorithm=sha1&amp;q-ak=AKID37IJFfEoSU66JdlDLfN0cDSxBSXta3ji&amp;q-sign-time=1550408753;1550410553&amp;q-key-time=1550408753;1550410553&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=ba4a3e100e809e9172cc96b074d1de60694a5b11&amp;x-cos-security-token=68d664244f467379c4b46fe0b7d4bf36217eb6ec10001" alt=""></p>
+<h3 id="恢复图像">恢复图像</h3>
+<p>这里需要注意的是，参与运算的图像有浮点型和整数型，整数型要归一化才可以和浮点型运算。</p>
+<pre><code class="language-c++">int RecoverPicture(Mat* scr_img, Mat* t_img, Mat* recover_img, int* A)
+{
+	float average = (float)(A[0] + A[1] + A[2]) / 3;
+	cout &lt;&lt;&quot;A&quot;&lt;&lt; average/255 &lt;&lt; endl;
+	if (average &gt; 220)
+		average = 220;
+	for (int row = 0; row &lt; scr_img-&gt;rows; row++)
+	{
+		for (int col = 0; col &lt; scr_img-&gt;cols; col++)
+		{
+			for (int i = 0; i &lt; 3; i++)
+			{
+				recover_img-&gt;at&lt;Vec3f&gt;(row, col)[i] = ((float)scr_img-&gt;at&lt;Vec3b&gt;(row, col)[i]/255 -average/255) / t_img-&gt;at&lt;float&gt;(row, col) + average /255;
+			}
+		}
+	}
+	return 0;
+}
+</code></pre>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E7%BB%93%E6%9E%9C.png?q-sign-algorithm=sha1&amp;q-ak=AKIDrzrQ6phIafnfI4dzhBt5SQEUmycUL2DJ&amp;q-sign-time=1550408693;1550410493&amp;q-key-time=1550408693;1550410493&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=736df773a1fe4c9fd3d8205e3a6bcb01463ec681&amp;x-cos-security-token=61298ad80dbf09dc974fd71dad7e35887c3b0de410001" alt=""></p>
+<h3 id="不足">不足</h3>
+<p>如果图像中，天空区域过亮或者具有大面积天空区域，去雾图片会出现色斑效应，看网上有人指出可能是t0的最小值为to，当大量t趋于一个值时就会出现色斑效应，另外如果大气光值找的不准确，色彩就会失真，这些问题等后期再解决。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/%E7%BC%BA%E7%82%B9.png?q-sign-algorithm=sha1&amp;q-ak=AKIDxNMBTFnufgykmq90SU4g7e1MBtnqJwZu&amp;q-sign-time=1550408467;1550410267&amp;q-key-time=1550408467;1550410267&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=478b17abe4434ed95de30ebd38a47b134efc27b3&amp;x-cos-security-token=28d672ceeaaaa65acdb159619f153aeff06efa4f10001" alt=""></p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://bixiaopeng0.github.io//post/sou-suo-ji-qiao">
+                  <h3 class="post-title">
+                    搜索技巧
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
