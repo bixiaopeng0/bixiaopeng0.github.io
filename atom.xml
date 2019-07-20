@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-07-20T07:40:18.733Z</updated>
+    <updated>2019-07-20T08:08:07.736Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io/"/>
     <link rel="self" href="https://bixiaopeng0.github.io//atom.xml"/>
@@ -11,35 +11,30 @@
     <icon>https://bixiaopeng0.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://bixiaopeng0.github.io//post/hello-gridea</id>
-        <link href="https://bixiaopeng0.github.io//post/hello-gridea">
+        <title type="html"><![CDATA[搜索技巧]]></title>
+        <id>https://bixiaopeng0.github.io//post/sou-suo-ji-qiao</id>
+        <link href="https://bixiaopeng0.github.io//post/sou-suo-ji-qiao">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+        <updated>2019-07-20T07:50:33.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="双引号完全匹配">双引号完全匹配</h2>
+<p>​	在关键词上加上双引号，这样搜素引擎只返回和关键词完全符合的搜素结果。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/shuang.png" alt=""></p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="http://hvenotes.fehey.com/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>𝖶𝗂𝗇𝖽𝗈𝗐𝗌</strong> 或 <strong>𝖬𝖺𝖼𝖮𝖲</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <content type="html"><![CDATA[<h2 id="双引号完全匹配">双引号完全匹配</h2>
+<p>​	在关键词上加上双引号，这样搜素引擎只返回和关键词完全符合的搜素结果。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/shuang.png" alt=""></p>
+<!--more-->
+<h2 id="排除关键词">排除关键词</h2>
+<p>​	如果搜素的部分内容不是自己想要的结果，可以使用 - 排除制定内容。使用形式：A -B 注意A后面的空格不能去掉，B紧跟减号。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/-.png" alt=""></p>
+<h2 id="在指定网站内搜素">在指定网站内搜素</h2>
+<p>​	在输入框内输入site:网址 关键字 就在在输入的网址内进行关键字搜素。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/site.png" alt=""></p>
+<h2 id="搜素指定格式的文件">搜素指定格式的文件</h2>
+<p>​	这个在下载电子书时，还是蛮重要的。在输入框键入filetype:文件格式 输入关键词后，搜素结果只会显示指定格式的文件。另外，用谷歌搜素外网电子书真的是好用。</p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype.png" alt=""></p>
+<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype1.png" alt=""></p>
+<p>另外上述搜素技巧可以组合使用哟。</p>
 ]]></content>
     </entry>
 </feed>
