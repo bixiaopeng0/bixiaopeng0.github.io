@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>搜索技巧 | 晓鹏博客</title>
+<title>CMake | 晓鹏博客</title>
 <link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1563636453442">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -74,12 +74,16 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              搜索技巧
+              CMake
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2018-07-31 ·
+                · 2019-07-20 ·
               </time>
+              
+                <a href="https://bixiaopeng0.github.io//tag/bESrdLntS" class="post-tags">
+                  # 编译
+                </a>
               
                 <a href="https://bixiaopeng0.github.io//tag/3cgtua9uh" class="post-tags">
                   # 工具
@@ -87,25 +91,62 @@
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/sou-suo-ji-qiao.jpg')">
+              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/CMake.jpg')">
               </div>
             
             <div class="post-content">
-              <h2 id="双引号完全匹配">双引号完全匹配</h2>
-<p>​	在关键词上加上双引号，这样搜素引擎只返回和关键词完全符合的搜素结果。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/shuang.png" alt=""></p>
+              <h1 id="cmake">cmake</h1>
+<h2 id="简介">简介</h2>
+<p>Cmake是众多make工具中的一种，对代码进行编译，测试以及打包操作的跨平台工具，cmake在工作时，主要分为两部分。首先，编写cmaklists.txt文件，然后用cmake命令将CMakeLists.txt文件转化为make所需要的makefile文件，最后用make命令编译源码生成可执行程序或共享库</p>
 <!--more-->
-<h2 id="排除关键词">排除关键词</h2>
-<p>​	如果搜素的部分内容不是自己想要的结果，可以使用 - 排除制定内容。使用形式：A -B 注意A后面的空格不能去掉，B紧跟减号。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/-.png" alt=""></p>
-<h2 id="在指定网站内搜素">在指定网站内搜素</h2>
-<p>​	在输入框内输入site:网址 关键字 就在在输入的网址内进行关键字搜素。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/site.png" alt=""></p>
-<h2 id="搜素指定格式的文件">搜素指定格式的文件</h2>
-<p>​	这个在下载电子书时，还是蛮重要的。在输入框键入filetype:文件格式 输入关键词后，搜素结果只会显示指定格式的文件。另外，用谷歌搜素外网电子书真的是好用。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype.png" alt=""></p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype1.png" alt=""></p>
-<p>另外上述搜素技巧可以组合使用哟。</p>
+<h2 id="优点">优点</h2>
+<ul>
+<li>源码是跨平台的，可以直接用cmake在linux下编译</li>
+<li>源码和工程文件分开，便于代码版本管理</li>
+</ul>
+<h2 id="常用命令">常用命令</h2>
+<ul>
+<li>
+<p>指定cmake最小版本,防止因为cmake语法不向下兼容。</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.4.1)
+</code></pre>
+</li>
+<li>
+<p>设置项目名称</p>
+<pre><code class="language-cmake">project(demo)
+</code></pre>
+</li>
+<li>
+<p>设置编译类型</p>
+<pre><code class="language-cmake">add_executable(demo demo.cpp) # 生成可执行文件
+add_library(common STATIC util.cpp) # 生成静态库
+add_library(common SHARED util.cpp) # 生成动态库或共享库
+</code></pre>
+</li>
+<li>
+<p>搜寻文件</p>
+<pre><code class="language-cmake">file(GLOB APP_LIB &quot;*.h&quot; &quot;*.cpp&quot;)
+add_library(uavDetect SHARED ${APP_LIB})
+</code></pre>
+</li>
+<li>
+<p>添加链接库</p>
+<pre><code class="language-cmake">target_link_libraries(uavDetect ${OpenCV_LIBS})
+</code></pre>
+</li>
+<li>
+<p>查找依赖包</p>
+<pre><code class="language-cmake">find_package(OpenCV)
+</code></pre>
+</li>
+</ul>
+<h2 id="注意事项">注意事项</h2>
+<ul>
+<li>之前工程文件调用了opencv库，在编译的时候是默认用了X86架构，但是opencv只有64位的，所以一直报错，最初以为cmake没有找到opencv的路径，最后发现是默认调用了win32编译器，在gui界面换一下就好，然后在gui里生成。</li>
+<li>在使用时，最好把源码和工程分开，这样相对好管理。</li>
+</ul>
+<p>emmmmm,好多语法还不熟悉，以后慢慢补充吧</p>
+<p>后续。。。。。</p>
 
             </div>
           </article>
@@ -114,9 +155,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://bixiaopeng0.github.io//post/2018-dian-sai-cheng-xu-shi-xian-dian-liu-xin-hao-jian-ce-zhuang-zhi">
+            <a href="https://bixiaopeng0.github.io//post/an-tong-dao-qu-wu">
               <h3 class="post-title">
-                2018电赛程序实现---电流信号检测装置
+                暗通道去雾
               </h3>
             </a>
           </div>  
