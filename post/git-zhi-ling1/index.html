@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>搜索技巧 | 晓鹏博客</title>
+<title>Git指令 | 晓鹏博客</title>
 <link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1563718423963">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -74,12 +74,16 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              搜索技巧
+              Git指令
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2018-07-31 ·
+                · 2019-07-21 ·
               </time>
+              
+                <a href="https://bixiaopeng0.github.io//tag/q5F8ji5CsT" class="post-tags">
+                  # Git
+                </a>
               
                 <a href="https://bixiaopeng0.github.io//tag/3cgtua9uh" class="post-tags">
                   # 工具
@@ -87,25 +91,40 @@
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/sou-suo-ji-qiao.jpg')">
+              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/git-zhi-ling1.jpg')">
               </div>
             
             <div class="post-content">
-              <h2 id="双引号完全匹配">双引号完全匹配</h2>
-<p>​	在关键词上加上双引号，这样搜素引擎只返回和关键词完全符合的搜素结果。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/shuang.png" alt=""></p>
-<!--more-->
-<h2 id="排除关键词">排除关键词</h2>
-<p>​	如果搜素的部分内容不是自己想要的结果，可以使用 - 排除制定内容。使用形式：A -B 注意A后面的空格不能去掉，B紧跟减号。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/-.png" alt=""></p>
-<h2 id="在指定网站内搜素">在指定网站内搜素</h2>
-<p>​	在输入框内输入site:网址 关键字 就在在输入的网址内进行关键字搜素。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/site.png" alt=""></p>
-<h2 id="搜素指定格式的文件">搜素指定格式的文件</h2>
-<p>​	这个在下载电子书时，还是蛮重要的。在输入框键入filetype:文件格式 输入关键词后，搜素结果只会显示指定格式的文件。另外，用谷歌搜素外网电子书真的是好用。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype.png" alt=""></p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype1.png" alt=""></p>
-<p>另外上述搜素技巧可以组合使用哟。</p>
+              <h1 id="git-指令">git 指令</h1>
+<ul>
+<li>
+<p>配置用户名即邮箱，以及验证</p>
+<pre><code class="language-python">git config --global user.name &quot;  &quot; #配置用户名
+#global对电脑上所有的仓库起作用，不加的话只对当前仓库有效
+git config --global user.email &quot;  &quot; #配置邮箱
+git config user.name
+git config user.email #查看配置后的用户名和邮箱
+</code></pre>
+</li>
+<li>
+<p>将GitHub上的仓库克隆到本地</p>
+<pre><code class="language-python">cd GitHub_test/   #进入GitHub目录
+git clone https://github.com/bixiaopeng0/bixiaopeng0.github.io.git
+</code></pre>
+</li>
+<li>
+<p>将本地文件git到GitHub远程仓库</p>
+<pre><code class="language-python">git add something  #这里可以是具体某个文件或者文件夹  
+				   #将工作区的内容添加到暂存区
+git commit -m &quot;备注&quot;#将暂存区的内容提交到仓库区
+git push origin master #将仓库去的内容推送到GitHub上
+
+</code></pre>
+</li>
+</ul>
+<p>time:2019/7/21</p>
+<hr>
+<p>后续。。。。</p>
 
             </div>
           </article>
@@ -114,9 +133,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://bixiaopeng0.github.io//post/2018-dian-sai-cheng-xu-shi-xian-dian-liu-xin-hao-jian-ce-zhuang-zhi">
+            <a href="https://bixiaopeng0.github.io//post/cmake">
               <h3 class="post-title">
-                2018电赛程序实现---电流信号检测装置
+                CMake
               </h3>
             </a>
           </div>  

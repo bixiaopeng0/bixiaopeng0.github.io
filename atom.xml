@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io/</id>
     <title>晓鹏博客</title>
-    <updated>2019-07-20T15:27:54.193Z</updated>
+    <updated>2019-07-21T14:13:48.040Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io/"/>
     <link rel="self" href="https://bixiaopeng0.github.io//atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://bixiaopeng0.github.io//images/avatar.png</logo>
     <icon>https://bixiaopeng0.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, 晓鹏博客</rights>
+    <entry>
+        <title type="html"><![CDATA[Git指令]]></title>
+        <id>https://bixiaopeng0.github.io//post/git-zhi-ling1</id>
+        <link href="https://bixiaopeng0.github.io//post/git-zhi-ling1">
+        </link>
+        <updated>2019-07-21T14:12:34.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="git-指令">git 指令</h1>
+<ul>
+<li>
+<p>配置用户名即邮箱，以及验证</p>
+<pre><code class="language-python">git config --global user.name &quot;  &quot; #配置用户名
+#global对电脑上所有的仓库起作用，不加的话只对当前仓库有效
+git config --global user.email &quot;  &quot; #配置邮箱
+git config user.name
+git config user.email #查看配置后的用户名和邮箱
+</code></pre>
+</li>
+<li>
+<p>将GitHub上的仓库克隆到本地</p>
+<pre><code class="language-python">cd GitHub_test/   #进入GitHub目录
+git clone https://github.com/bixiaopeng0/bixiaopeng0.github.io.git
+</code></pre>
+</li>
+<li>
+<p>将本地文件git到GitHub远程仓库</p>
+<pre><code class="language-python">git add something  #这里可以是具体某个文件或者文件夹  
+				   #将工作区的内容添加到暂存区
+git commit -m &quot;备注&quot;#将暂存区的内容提交到仓库区
+git push origin master #将仓库去的内容推送到GitHub上
+
+</code></pre>
+</li>
+</ul>
+<p>time:2019/7/21</p>
+<hr>
+<p>后续。。。。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CMake]]></title>
         <id>https://bixiaopeng0.github.io//post/cmake</id>
