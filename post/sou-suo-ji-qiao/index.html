@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>搜索技巧 | 晓鹏博客</title>
-<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1563807692692">
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1563807797764">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://bixiaopeng0.github.io//styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://bixiaopeng0.github.io/">
-  <img class="avatar" src="https://bixiaopeng0.github.io//images/avatar.png?v=1563807692692" alt="">
+  <img class="avatar" src="https://bixiaopeng0.github.io//images/avatar.png?v=1563807797764" alt="">
   </a>
   <h1 class="site-title">
     晓鹏博客
@@ -49,7 +49,7 @@
       
     
       
-        <a href="https://bixiaopeng0.github.io//post/guan-yu/" class="menu">
+        <a href="https://bixiaopeng0.github.io//post/guan-yu/" class="menu" target="_blank">
           关于
         </a>
       
@@ -122,6 +122,32 @@
           </div>  
         
 
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
         
     
         <div class="site-footer">
