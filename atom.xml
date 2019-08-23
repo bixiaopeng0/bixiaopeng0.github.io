@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io/</id>
     <title>晓鹏博客</title>
-    <updated>2019-08-12T13:11:15.752Z</updated>
+    <updated>2019-08-23T14:40:45.806Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io/"/>
     <link rel="self" href="https://bixiaopeng0.github.io//atom.xml"/>
@@ -11,17 +11,55 @@
     <icon>https://bixiaopeng0.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, 晓鹏博客</rights>
     <entry>
+        <title type="html"><![CDATA[Python调用动态链接库]]></title>
+        <id>https://bixiaopeng0.github.io//post/python-diao-yong-dong-tai-lian-jie-ku</id>
+        <link href="https://bixiaopeng0.github.io//post/python-diao-yong-dong-tai-lian-jie-ku">
+        </link>
+        <updated>2019-08-23T14:34:47.000Z</updated>
+        <content type="html"><![CDATA[<!-- more --> 
+<h1 id="dll生成">DLL生成</h1>
+<ol>
+<li>选择win32控制台项目</li>
+<li>选择dll项目</li>
+<li>除了空项目外，导出符号，预编译头文件，安全周期检查都要选择。</li>
+<li>如果预编译头文件出问题，在属性-c++-预编译头选型里不使用预编译头文件</li>
+</ol>
+<p>按照以上步骤走就可以生成成功了，vs也会生成模板，可以按照提示做</p>
+<h1 id="调用dll">调用DLL</h1>
+<p>首先抛出今天遇到的问题</p>
+<ol>
+<li>
+<pre><code class="language-c++">AttributeError: function 'recog_color' not found
+</code></pre>
+</li>
+<li>
+<pre><code class="language-c++">ctypes.ArgumentError: argument 7: &lt;class 'TypeError'&gt;: Don't know how to convert parameter 7
+</code></pre>
+</li>
+</ol>
+<p>第一个问题是建立的c++工程，在导出头文件前面加上</p>
+<pre><code class="language-c++">#ifdef COLOR_RECOG_DLL_EXPORTS
+#define COLOR_RECOG_DLL_API  extern &quot;C&quot; __declspec(dllexport)
+#else
+#define COLOR_RECOG_DLL_API  extern &quot;C&quot; __declspec(dllimport)
+#endif
+</code></pre>
+<p>这一段除了extern &quot;C&quot;是系统自己生成的，在前面加上extern &quot;c&quot;就行</p>
+<p>第二个问题是参数问题</p>
+<ul>
+<li>第一个出问题是因为参数不匹配，传入的参数是float型，实际参数是int型</li>
+<li>Mat类型不可以直接传，需要变化一下，具体代码在github里面</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Git指令]]></title>
         <id>https://bixiaopeng0.github.io//post/git-zhi-ling1</id>
         <link href="https://bixiaopeng0.github.io//post/git-zhi-ling1">
         </link>
         <updated>2019-07-21T14:12:34.000Z</updated>
-        <summary type="html"><![CDATA[<h1 id="git-指令">git 指令</h1>
-<ul>
-<li>配置用户名即邮箱，以及验证</li>
-</ul>
-]]></summary>
-        <content type="html"><![CDATA[<h1 id="git-指令">git 指令</h1>
+        <content type="html"><![CDATA[<!-- more -->
+<h1 id="git-指令">git 指令</h1>
 <ul>
 <li>配置用户名即邮箱，以及验证</li>
 </ul>
