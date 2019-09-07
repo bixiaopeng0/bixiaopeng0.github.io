@@ -1,0 +1,385 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title> Socket传输图片 | 晓鹏博客</title>
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1567848750615">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://bixiaopeng0.github.io//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://bixiaopeng0.github.io/">
+  <img class="avatar" src="https://bixiaopeng0.github.io//images/avatar.png?v=1567848750615" alt="">
+  </a>
+  <h1 class="site-title">
+    晓鹏博客
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://bixiaopeng0.github.io//post/guan-yu/" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+               Socket传输图片
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-09-07 ·
+              </time>
+              
+                <a href="https://bixiaopeng0.github.io//tag/GuMrRKBUGH" class="post-tags">
+                  # socket
+                </a>
+              
+            </div>
+            
+              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/socket-chuan-shu-tu-pian1.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <!--more-->
+<p>最近做一个项目，需要c++端和python端进行通信，c++将图片传到python端，然后python把处理完数据传回到c++端，然后就尝试了用socket通信，c++作为客户端，python作为服务器。</p>
+<h2 id="文件流发送">文件流发送</h2>
+<p>刚开始是用本地图片测试的，c++读取图片，发送到python端，然后python将图片数据写进硬盘，然后进行读取，然后测试</p>
+<pre><code class="language-c++">#include&lt;iostream&gt;
+#include&lt;winsock.h&gt;
+#pragma comment(lib,&quot;ws2_32.lib&quot;)
+using namespace std;
+void initialization();
+int main() {
+
+
+	int cnt = 0;
+	//定义长度变量
+	int send_len = 0;
+	int recv_len = 0;
+	//定义发送缓冲区和接受缓冲区
+	char send_buf[2000];
+	char recv_buf[2000];
+	//定义服务端套接字，接受请求套接字
+	SOCKET s_server;
+	//服务端地址客户端地址
+	SOCKADDR_IN server_addr;
+	initialization();
+	//填充服务端信息
+	server_addr.sin_family = AF_INET;
+	server_addr.sin_addr.S_un.S_addr = inet_addr(&quot;127.0.0.1&quot;);
+	server_addr.sin_port = htons(1234);
+	//创建套接字
+	s_server = socket(AF_INET, SOCK_STREAM, 0);
+	if (connect(s_server, (SOCKADDR *)&amp;server_addr, sizeof(SOCKADDR)) == SOCKET_ERROR) {
+		cout &lt;&lt; &quot;服务器连接失败！&quot; &lt;&lt; endl;
+		WSACleanup();
+	}
+	else {
+		cout &lt;&lt; &quot;服务器连接成功！&quot; &lt;&lt; endl;
+	}
+	//发送图片
+	FILE *fq = fopen(&quot;2.jpg&quot;, &quot;rb&quot;);
+	while (!feof(fq))
+	{
+		cout &lt;&lt; cnt++ &lt;&lt; endl;
+		send_len = fread(send_buf, 1, sizeof(send_buf), fq);
+		send(s_server, send_buf, 2000, 0);
+	}
+	send(s_server, &quot;exit&quot;, 2000, 0);
+
+
+
+
+
+	//发送,接收数据
+	while (1) {
+		cout &lt;&lt; &quot;请输入发送信息:&quot;;
+		cin &gt;&gt; send_buf;
+		send_len = send(s_server, send_buf, 100, 0);
+		if (send_len &lt; 0) {
+			cout &lt;&lt; &quot;发送失败！&quot; &lt;&lt; endl;
+			break;
+		}
+		recv_len = recv(s_server, recv_buf, 100, 0);
+		if (recv_len &lt; 0) {
+			cout &lt;&lt; &quot;接受失败！&quot; &lt;&lt; endl;
+			break;
+		}
+		else {
+			cout &lt;&lt; &quot;服务端信息:&quot; &lt;&lt; recv_buf &lt;&lt; endl;
+		}
+
+	}
+	//关闭套接字
+	closesocket(s_server);
+	//释放DLL资源
+	WSACleanup();
+	return 0;
+}
+void initialization() {
+	//初始化套接字库
+	WORD w_req = MAKEWORD(2, 2);//版本号
+	WSADATA wsadata;
+	int err;
+	err = WSAStartup(w_req, &amp;wsadata);
+	if (err != 0) {
+		cout &lt;&lt; &quot;初始化套接字库失败！&quot; &lt;&lt; endl;
+	}
+	else {
+		cout &lt;&lt; &quot;初始化套接字库成功！&quot; &lt;&lt; endl;
+	}
+	//检测版本号
+	if (LOBYTE(wsadata.wVersion) != 2 || HIBYTE(wsadata.wHighVersion) != 2) {
+		cout &lt;&lt; &quot;套接字库版本号不符！&quot; &lt;&lt; endl;
+		WSACleanup();
+	}
+	else {
+		cout &lt;&lt; &quot;套接字库版本正确！&quot; &lt;&lt; endl;
+	}
+	//填充服务端地址信息
+
+}
+</code></pre>
+<pre><code class="language-python">def deal_image(sock):
+    # print(&quot;Accept connection from {0}&quot;.format(addr))  # 查看发送端的ip和端口
+    cnt = 0
+    new_filename = &quot;cat1.jpg&quot;
+    fp = open(&quot;scr.jpg&quot;, 'wb')
+    pxiel = 0
+    #接受焦距信息
+    data = sock.recv(200)
+    string = data.decode('utf-8','ignore').split('\x00')[0]
+    if string[0] == 'p':
+        pxiel = int(string[1:3])
+        print(pxiel)
+    #接受图片数据
+    data = sock.recv(2000)
+    start_time = time.time()
+    while True:
+            # sock.send(cnt)
+        # print(len(data))
+        # print(data[0:4])
+        string = data.decode('utf-8','ignore').split('\x00')[0]
+        # print(type(data),type(string))
+        if string=='end':
+            print(&quot;over&quot;)
+            break
+
+        fp.write(data)  # 写入图片数据
+        data = sock.recv(2000)
+            # s= dete_img.test_img(img_path).cpu().numpy()[0]
+            # sock.send(str(key_value[s]).encode('utf-8'))      #.decode('utf-8')).encode('utf-8')
+            #print(s)
+    fp.close()
+    end_time = time.time()
+    #发送识别到的信息
+    str_list = [&quot;1&quot;,&quot;2&quot;]
+    str = &quot;1,jingling,0.34,100,200,300,400,23,t16,0.34,100,200,300,400,23&quot;
+    sock.send(str.encode())
+    str = &quot;0.34,100,200,300,400,23&quot;
+    sock.send(str.encode())
+    print(end_time-start_time)
+    sock.close()
+
+
+</code></pre>
+<h2 id="编码发送">编码发送</h2>
+<p>后来意识到把图片数据写到硬盘和之前的文件夹通信一样，不是很安全，所以就想对视频中图片进行编码，然后服务器解码即可。</p>
+<pre><code class="language-c++">vector&lt;string&gt; sendsocket::getSocketInfo(cv::Mat img, int p)
+{
+	int x1 = (img.cols - img.rows) / 2;
+	cv::Rect rect = cv::Rect(x1, 0, img.rows, img.rows);
+	img = img(rect);
+	std::vector&lt;uchar&gt; data_encode;
+	std::vector&lt;int&gt; quality;
+	quality.push_back(CV_IMWRITE_JPEG_QUALITY);
+	quality.push_back(90);//进行90%的压缩
+	imencode(&quot;.jpg&quot;, img, data_encode, quality);//将图像编码
+	int nSize = data_encode.size();
+	string s1 = &quot;p,&quot; + to_string(p) + &quot;,&quot; + to_string(nSize) + &quot;,&quot;;
+	const char* c = s1.c_str();
+	for (long int i = 0; i &lt; nSize; i++)
+	{
+		encodeImg[i] = data_encode[i];
+	}
+	send(sock, c, 200, 0);
+	//发送图片
+	long int send_num = 0;
+	while (send_num &lt; nSize)
+	{
+		send(sock, encodeImg + send_num, 2000, 0);
+		send_num += 2000;
+	}
+
+	send(sock, &quot;end&quot;, 100, 0);
+	//接受数据
+	recv(sock, recv_buf, 400, 0);
+	vector&lt;string&gt; img_info = split(recv_buf, &quot;,&quot;);
+	memset(recv_buf, '\0', sizeof(recv_buf));
+	memset(&amp;encodeImg, '\0', sizeof(encodeImg));  //初始化结构体
+	return img_info;
+
+}
+</code></pre>
+<h2 id="多线程编码发送">多线程编码发送</h2>
+<p>之前通信顺序是串行的，感觉这样速度很慢，所以想用多线程提高一下速度，如果图片数据比较小还好，速度只被网络处理时间限制，如果图片很大的话，socket传输时间还是挺长的。</p>
+<p>在python中，将网络和socket通信各自给了一个线程，理想情况下是，网络处理完图片，就可以处理下一张图片，不需要等待。</p>
+<pre><code class="language-python">def dealSocketMessage():
+    global image,pxiel,sock,recv_flag,send_flag,lock
+
+    # while True:
+    #     cv2.waitKey(100)
+    #     print(&quot;test socket&quot;)
+    cnt = 0
+    while True:
+        # print(&quot;recv_flag&quot;,recv_flag)
+        if recv_flag:
+            start_time_s = time.time()
+            start_time = time.time()
+            data = sock.recv(200)
+            print(&quot;time1&quot;,time.time()-start_time)
+            string = data.decode('utf-8', 'ignore').split(',')
+            if string[0] == 'p':
+                pxiel = int(string[1])
+            img_bytes = bytes()
+            start_time = time.time()
+            while True:
+                start_time1= time.time()
+                data = sock.recv(2000)
+                print(&quot;recve img time&quot;,time.time()-start_time1)
+                string = data.decode('utf-8', 'ignore').split('\x00')[0]
+                if string == &quot;end&quot;:
+                    # print(&quot;接受成功&quot;)
+                    lock.acquire()
+                    img = np.asarray(bytearray(img_bytes), dtype=&quot;uint8&quot;)
+                    img = cv2.imdecode(img, cv2.IMREAD_COLOR)
+
+                    image = copy.deepcopy(img)
+                    lock.release()
+                    break
+                img_bytes = img_bytes + data
+            print(&quot;time2&quot;, time.time() - start_time)
+            str = &quot;,&quot;.join(str_list) + &quot;,&quot;
+            # 发送识别到的数据
+            sock.send(str.encode())
+            lock.acquire()
+            recv_flag = False
+            lock.release()
+            cnt+=1
+            if cnt==101:
+                cv2.waitKey()
+            print(&quot;recv time &quot;,(time.time()-start_time_s))
+        else:
+            cv2.waitKey(1)
+</code></pre>
+<h3 id="问题">问题</h3>
+<p>1、设置一个标志位，True代表socket接受图片数据，当为false表示接受完成。我是一直判断的，但是发现这样处理速度在1fps，当时很郁闷，后来改成每隔nms检测一次标志位就好了，但是具体原因还没有找到。</p>
+<p>2、如果图片数据比较小，可以达到顶速，也就是网络的速度，但是图片为1080p时，如果网络已经处理完图片，但是socket还在接受数据，这时会出现几百毫秒的卡顿，这个问题也没搞明白。</p>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://bixiaopeng0.github.io//post/python-diao-yong-dong-tai-lian-jie-ku">
+              <h3 class="post-title">
+                Python调用动态链接库
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://bixiaopeng0.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
