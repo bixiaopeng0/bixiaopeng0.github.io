@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Python调用动态链接库 | 晓鹏博客</title>
+<title>常犯的错误 | 晓鹏博客</title>
 <link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1568336056026">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -74,56 +74,32 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Python调用动态链接库
+              常犯的错误
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2019-08-23 ·
+                · 2019-09-13 ·
               </time>
-              
-                <a href="https://bixiaopeng0.github.io//tag/J9lOZ7aeY3" class="post-tags">
-                  # dll
-                </a>
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/python-diao-yong-dong-tai-lian-jie-ku.jpg')">
+              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/chang-fan-de-cuo-wu.jpg')">
               </div>
             
             <div class="post-content">
-              <!-- more --> 
-<h1 id="dll生成">DLL生成</h1>
-<ol>
-<li>选择win32控制台项目</li>
-<li>选择dll项目</li>
-<li>除了空项目外，导出符号，预编译头文件，安全周期检查都要选择。</li>
-<li>如果预编译头文件出问题，在属性-c++-预编译头选型里不使用预编译头文件</li>
-</ol>
-<p>按照以上步骤走就可以生成成功了，vs也会生成模板，可以按照提示做</p>
-<h1 id="调用dll">调用DLL</h1>
-<p>首先抛出今天遇到的问题</p>
-<ol>
-<li>
-<pre><code class="language-c++">AttributeError: function 'recog_color' not found
-</code></pre>
-</li>
-<li>
-<pre><code class="language-c++">ctypes.ArgumentError: argument 7: &lt;class 'TypeError'&gt;: Don't know how to convert parameter 7
-</code></pre>
-</li>
-</ol>
-<p>第一个问题是建立的c++工程，在导出头文件前面加上</p>
-<pre><code class="language-c++">#ifdef COLOR_RECOG_DLL_EXPORTS
-#define COLOR_RECOG_DLL_API  extern &quot;C&quot; __declspec(dllexport)
-#else
-#define COLOR_RECOG_DLL_API  extern &quot;C&quot; __declspec(dllimport)
-#endif
-</code></pre>
-<p>这一段除了extern &quot;C&quot;是系统自己生成的，在前面加上extern &quot;c&quot;就行</p>
-<p>第二个问题是参数问题</p>
+              <h3 id="vs">vs</h3>
 <ul>
-<li>第一个出问题是因为参数不匹配，传入的参数是float型，实际参数是int型</li>
-<li>Mat类型不可以直接传，需要变化一下，具体代码在github里面</li>
+<li>今天在调无人机代码，提示类UAV不存在，但是在头文件中是有引用的，然后调了好长时间才发现两个类的头文件宏定义判断是一样的。</li>
+<li>代码比较多的时候。不要用using namespace,之前因为这个问题，opencv和windows的函数发生了冲突，然后一个一个的加上去的。</li>
+</ul>
+<h3 id="qt">qt</h3>
+<ul>
+<li>qt在中文支持不好，尽量不要用中文写。</li>
+<li>命名不要用拼音，编号，否则二次开发比较麻烦。</li>
+</ul>
+<h3 id="opencv">opencv</h3>
+<ul>
+<li>多人开发，opencv版本要一致，这个之前也被坑过</li>
 </ul>
 
             </div>
@@ -133,9 +109,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://bixiaopeng0.github.io//post/git-zhi-ling1">
+            <a href="https://bixiaopeng0.github.io//post/socket-chuan-shu-tu-pian1">
               <h3 class="post-title">
-                Git指令
+                 Socket传输图片
               </h3>
             </a>
           </div>  
