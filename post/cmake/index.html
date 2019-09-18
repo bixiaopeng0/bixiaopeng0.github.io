@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CMake | 晓鹏博客</title>
-<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1568336056026">
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1568779008023">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://bixiaopeng0.github.io//styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://bixiaopeng0.github.io/">
-  <img class="avatar" src="https://bixiaopeng0.github.io//images/avatar.png?v=1568336056026" alt="">
+  <img class="avatar" src="https://bixiaopeng0.github.io//images/avatar.png?v=1568779008023" alt="">
   </a>
   <h1 class="site-title">
     晓鹏博客
@@ -144,6 +144,7 @@ add_library(uavDetect SHARED ${APP_LIB})
 <ul>
 <li>之前工程文件调用了opencv库，在编译的时候是默认用了X86架构，但是opencv只有64位的，所以一直报错，最初以为cmake没有找到opencv的路径，最后发现是默认调用了win32编译器，在gui界面换一下就好，然后在gui里生成。</li>
 <li>在使用时，最好把源码和工程分开，这样相对好管理。</li>
+<li>在gui里配置，首先选择编译器vs还是mingw等等，其实要选对架构，x64 or x86</li>
 </ul>
 <p>emmmmm,好多语法还不熟悉，以后慢慢补充吧</p>
 <p>后续。。。。。</p>
