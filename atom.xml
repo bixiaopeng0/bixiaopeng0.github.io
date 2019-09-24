@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io/</id>
     <title>晓鹏博客</title>
-    <updated>2019-09-24T07:26:39.489Z</updated>
+    <updated>2019-09-24T07:31:14.456Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io/"/>
     <link rel="self" href="https://bixiaopeng0.github.io//atom.xml"/>
@@ -16,30 +16,41 @@
         <link href="https://bixiaopeng0.github.io//post/linux-zhi-ling1">
         </link>
         <updated>2019-09-24T07:06:30.000Z</updated>
-        <content type="html"><![CDATA[<!--more>
-- 运行.run文件
-
-  - chmod +x xx.run提供权限
-  - ./  xx.run 运行   最好前面加上权限sudo
-
-- 解压文件 tar -xzvf XXX.tgz    
-
-- 复制文件 cp xx   xx
-
-- 创建目录 eg:   mkdir /usr/local/....
-
-- /usr:系统级目录 /usr/local 用户程序级目录
-
-- cd
-
-  - cd cuda 进入cuda目录
-
-- crtl+空格  换输入法
-
-- 查看nvidia板卡信息  watch -n 1 nvidia-smi
-待续。。。2019/09/24
-  
-
+        <content type="html"><![CDATA[<!--more-->
+<ul>
+<li>
+<p>运行.run文件</p>
+<ul>
+<li>chmod +x xx.run提供权限</li>
+<li>./  xx.run 运行   最好前面加上权限sudo</li>
+</ul>
+</li>
+<li>
+<p>解压文件 tar -xzvf XXX.tgz</p>
+</li>
+<li>
+<p>复制文件 cp xx   xx</p>
+</li>
+<li>
+<p>创建目录 eg:   mkdir /usr/local/....</p>
+</li>
+<li>
+<p>/usr:系统级目录 /usr/local 用户程序级目录</p>
+</li>
+<li>
+<p>cd</p>
+<ul>
+<li>cd cuda 进入cuda目录</li>
+</ul>
+</li>
+<li>
+<p>crtl+空格  换输入法</p>
+</li>
+<li>
+<p>查看nvidia板卡信息  watch -n 1 nvidia-smi<br>
+待续。。。2019/09/24</p>
+</li>
+</ul>
 ]]></content>
     </entry>
     <entry>
