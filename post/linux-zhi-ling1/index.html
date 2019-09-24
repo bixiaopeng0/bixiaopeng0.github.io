@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Git指令 | 晓鹏博客</title>
+<title>Linux 指令 | 晓鹏博客</title>
 <link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1569309994735">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -74,68 +74,47 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Git指令
+              Linux 指令
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2019-07-21 ·
+                · 2019-09-24 ·
               </time>
               
-                <a href="https://bixiaopeng0.github.io//tag/q5F8ji5CsT" class="post-tags">
-                  # Git
-                </a>
-              
-                <a href="https://bixiaopeng0.github.io//tag/3cgtua9uh" class="post-tags">
-                  # 工具
+                <a href="https://bixiaopeng0.github.io//tag/-HqMf0CAmA" class="post-tags">
+                  # linux
                 </a>
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/git-zhi-ling1.jpg')">
+              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/linux-zhi-ling1.jpg')">
               </div>
             
             <div class="post-content">
-              <!-- more -->
-<h1 id="git-指令">git 指令</h1>
-<ul>
-<li>
-<p>配置用户名即邮箱，以及验证</p>
-<!--more-->
-<pre><code class="language-python">git config --global user.name &quot;  &quot; #配置用户名
-#global对电脑上所有的仓库起作用，不加的话只对当前仓库有效
-git config --global user.email &quot;  &quot; #配置邮箱
-git config user.name
-git config user.email #查看配置后的用户名和邮箱
-</code></pre>
-</li>
-<li>
-<p>将GitHub上的仓库克隆到本地</p>
-<pre><code class="language-python">cd GitHub_test/   #进入GitHub目录
-git clone https://github.com/bixiaopeng0/bixiaopeng0.github.io.git
-</code></pre>
-</li>
-<li>
-<p>将本地文件git到GitHub远程仓库</p>
-<pre><code class="language-python">git add something  #这里可以是具体某个文件或者文件夹  
-				   #将工作区的内容添加到暂存区
-git commit -m &quot;备注&quot;#将暂存区的内容提交到仓库区
-git push origin master #将仓库去的内容推送到GitHub上
+              <!--more>
+- 运行.run文件
 
-</code></pre>
-</li>
-<li>
-<p>创建一个新的仓库</p>
-<pre><code class="language-python">git init
-git add README.md
-git commit -m &quot;first commit&quot;
-git remote add origin https://github.com/bixiaopeng0/Statistical-learning-method.git
-git push -u origin master
-</code></pre>
-</li>
-</ul>
-<p>time:2019/9/11</p>
-<hr>
-<p>后续。。。。</p>
+  - chmod +x xx.run提供权限
+  - ./  xx.run 运行   最好前面加上权限sudo
+
+- 解压文件 tar -xzvf XXX.tgz    
+
+- 复制文件 cp xx   xx
+
+- 创建目录 eg:   mkdir /usr/local/....
+
+- /usr:系统级目录 /usr/local 用户程序级目录
+
+- cd
+
+  - cd cuda 进入cuda目录
+
+- crtl+空格  换输入法
+
+- 查看nvidia板卡信息  watch -n 1 nvidia-smi
+待续。。。2019/09/24
+  
+
 
             </div>
           </article>
@@ -144,9 +123,9 @@ git push -u origin master
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://bixiaopeng0.github.io//post/cmake">
+            <a href="https://bixiaopeng0.github.io//post/chang-fan-de-cuo-wu">
               <h3 class="post-title">
-                CMake
+                常犯的错误
               </h3>
             </a>
           </div>  
