@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>搜索技巧 | 晓鹏博客</title>
+<title>linux环境配置 | 晓鹏博客</title>
 <link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1570426487015">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -74,38 +74,142 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              搜索技巧
+              linux环境配置
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2018-07-31 ·
+                · 2019-10-07 ·
               </time>
               
-                <a href="https://bixiaopeng0.github.io//tag/3cgtua9uh" class="post-tags">
-                  # 工具
+                <a href="https://bixiaopeng0.github.io//tag/-HqMf0CAmA" class="post-tags">
+                  # linux
                 </a>
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/sou-suo-ji-qiao.jpg')">
+              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io//post-images/linux-huan-jing-pei-zhi1.jpg')">
               </div>
             
             <div class="post-content">
-              <h2 id="双引号完全匹配">双引号完全匹配</h2>
-<p>​	在关键词上加上双引号，这样搜素引擎只返回和关键词完全符合的搜素结果。</p>
-<!--more-->
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/shuang.png" alt=""></p>
-<h2 id="排除关键词">排除关键词</h2>
-<p>​	如果搜素的部分内容不是自己想要的结果，可以使用 - 排除制定内容。使用形式：A -B 注意A后面的空格不能去掉，B紧跟减号。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/-.png" alt=""></p>
-<h2 id="在指定网站内搜素">在指定网站内搜素</h2>
-<p>​	在输入框内输入site:网址 关键字 就在在输入的网址内进行关键字搜素。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/site.png" alt=""></p>
-<h2 id="搜素指定格式的文件">搜素指定格式的文件</h2>
-<p>​	这个在下载电子书时，还是蛮重要的。在输入框键入filetype:文件格式 输入关键词后，搜素结果只会显示指定格式的文件。另外，用谷歌搜素外网电子书真的是好用。</p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype.png" alt=""></p>
-<p><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype1.png" alt=""></p>
-<p>另外上述搜素技巧可以组合使用哟。</p>
+              <ul>
+<li>
+<p>install googlepinyin</p>
+<ul>
+<li>卸载IBUS</li>
+</ul>
+<pre><code class="language-c">sudo apt-get  purge  ibus
+</code></pre>
+<ul>
+<li>打开ubuntu软件中心，搜素fcitx并安装</li>
+<li>sudo apt-get install fcitx-googlepinyin</li>
+<li>将输入法系统换成fcitx</li>
+<li>重启reboot</li>
+<li>输入法简体和繁体相互切换  crtl+shift+f</li>
+</ul>
+</li>
+<li>
+<p>安装nvidia显卡驱动</p>
+<ul>
+<li>之前想通过下载驱动安装，但是安装的时候提示脚本失败，在网上有没找到相应的解决方法。</li>
+<li>通过ubuntu驱动更新，自动安装</li>
+<li>安装完了  reboot</li>
+<li>在终端敲入 nvidia-smi 如果显示相应的内容则安装成功。</li>
+</ul>
+</li>
+<li>
+<p>typora</p>
+<ul>
+<li>直接进官网，会有相应的提示进行安装</li>
+</ul>
+</li>
+<li>
+<p>禁止ubuntu自动更新</p>
+<ul>
+<li>之前ubuntu自动更新，把显卡驱动整坏了，坑死我了</li>
+<li>在软件更新里面，设置成never</li>
+</ul>
+</li>
+<li>
+<p>安装cuda</p>
+<ul>
+<li>
+<p>sudo sh cuda_9.0.176_384.81_linux.run 如果提示不支持compiler  在命令后面加上-override</p>
+</li>
+<li>
+<p>添加环境变量</p>
+<ul>
+<li>
+<p>gedit ~/.bashrc</p>
+</li>
+<li>
+<pre><code class="language-bash">export PATH=/usr/local/cuda-9.1/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-9.1/lib64:$LD_LIBRARY_PATH
+</code></pre>
+</li>
+<li>
+<pre><code class="language-bash">source ~/.bashrc
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>安装cudnn</p>
+<ul>
+<li>
+<p>tar -xzvf cudnn-*</p>
+<pre><code>sudo cp cuda/include/cudnn.h /usr/local/cuda/include
+sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>anaconda</p>
+<ul>
+<li>
+<pre><code>bash Anaconda3-4.2.0-Linux-x86_64.sh
+</code></pre>
+</li>
+<li>
+<p>在安装过程中添加环境变量</p>
+</li>
+<li>
+<p>生效需要重启</p>
+</li>
+</ul>
+</li>
+<li>
+<p>pycharm</p>
+<ul>
+<li>
+<p>安装直接提取出来就行</p>
+</li>
+<li>
+<p>创建快捷方式</p>
+<ul>
+<li>
+<pre><code>cd /usr/share/applications
+sudo gedit pycharm.desktop
+</code></pre>
+</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>[Desktop Entry]<br>
+Version=1.0<br>
+Type=Application<br>
+Name=Pycharm<br>
+Icon=/home/mengdan/Downloads/pycharm-2018.2.1/bin/pycharm.png<br>
+Exec=sh /home/mengdan/Downloads/pycharm-2018.2.1/bin/pycharm.sh<br>
+MimeType=application/x-py;<br>
+Name[en_US]=pycharm</p>
+</li>
+<li></li>
+</ul>
 
             </div>
           </article>
@@ -114,9 +218,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://bixiaopeng0.github.io//post/2018-dian-sai-cheng-xu-shi-xian-dian-liu-xin-hao-jian-ce-zhuang-zhi">
+            <a href="https://bixiaopeng0.github.io//post/linux-zhi-ling1">
               <h3 class="post-title">
-                2018电赛程序实现---电流信号检测装置
+                Linux 指令
               </h3>
             </a>
           </div>  
