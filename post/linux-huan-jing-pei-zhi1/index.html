@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>linux环境配置 | 晓鹏博客</title>
-<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1570426487015">
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io//favicon.ico?v=1570850382879">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://bixiaopeng0.github.io//styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://bixiaopeng0.github.io/">
-  <img class="avatar" src="https://bixiaopeng0.github.io//images/avatar.png?v=1570426487015" alt="">
+  <img class="avatar" src="https://bixiaopeng0.github.io//images/avatar.png?v=1570850382879" alt="">
   </a>
   <h1 class="site-title">
     晓鹏博客
@@ -207,6 +207,51 @@ Icon=/home/mengdan/Downloads/pycharm-2018.2.1/bin/pycharm.png<br>
 Exec=sh /home/mengdan/Downloads/pycharm-2018.2.1/bin/pycharm.sh<br>
 MimeType=application/x-py;<br>
 Name[en_US]=pycharm</p>
+<ul>
+<li>
+<p>gcc版本</p>
+</li>
+<li>
+<pre><code>gcc -v   查看版本
+</code></pre>
+</li>
+<li>
+<pre><code class="language-c">gcc versions later than 6 are not supported!
+gcc 降级
+$ sudo apt-get install -y gcc-4.8
+$ sudo apt-get install -y g++-4.8
+$ cd /usr/bin
+$ sudo rm gcc
+$ sudo ln -s gcc-4.8 gcc
+$ sudo rm g++
+$ sudo ln -s g++-4.8 g++
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>cmake cmake-gui</p>
+<ul>
+<li>sudo apt-get  install cmake</li>
+<li>sudo apt-get install cmake-qt-gui</li>
+</ul>
+</li>
+<li>
+<p>caffe</p>
+<ul>
+<li>最近ubnutu18.04安装caffe-ssd-mobilnet遇到各种坑，记录一下这个过程遇到的问题。</li>
+<li>cmake时候，提示gcc版本过高，解决：gcc 降级</li>
+<li>cmake过程，缺少依赖库，解决：安装相应的库</li>
+<li>cmake过程，部分包与anaconda的包冲突，解决：在安装caffe时将anaconda的环境变量去掉。</li>
+<li>编译过程中，到了90左右，报错了，显示boost未定义，这个是最终换成ubuntu16.04解决的。</li>
+<li>在ubuntu16.04编译过程中，异常顺利，没有遇到之前的问题，不过也遇到其他一些问题
+<ul>
+<li>运行demo.py  提示错误 1vs 4....，把某个文件里面的caffe的注释取消即可，具体文件记不太清楚了。</li>
+<li>在转换voc数据集到指定格式时，运行create_data.sh，提示wu_inspire这个类的未定义，但是删了这个类之后，其他类也没与问题啊，之前在其他网络用这个数据集，也没有问题的 ？？？</li>
+<li>训练时，提示内存溢出，把batch_size改小一点即可。</li>
+</ul>
+</li>
+</ul>
 </li>
 <li></li>
 </ul>
