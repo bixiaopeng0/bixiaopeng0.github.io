@@ -1,0 +1,640 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>opencv dnn模块 | 晓鹏博客</title>
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io/favicon.ico?v=1571132231053">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://bixiaopeng0.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://bixiaopeng0.github.io">
+  <img class="avatar" src="https://bixiaopeng0.github.io/images/avatar.png?v=1571132231053" alt="">
+  </a>
+  <h1 class="site-title">
+    晓鹏博客
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://bixiaopeng0.github.io//post/guan-yu/" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+      
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              opencv dnn模块
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-10-12 ·
+              </time>
+              
+                <a href="https://bixiaopeng0.github.io/tag/4V1Lx1Anu" class="post-tags">
+                  # opencv
+                </a>
+              
+            </div>
+            
+              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io/post-images/opencv-dnn-mo-kuai.jpg')">
+              </div>
+            
+            <div class="post-content">
+              <!--more-->
+<p>最近在研究opencv的dnn模块，简单的做一个记录，以备后面使用。</p>
+<h3 id="dnn简介">dnn简介</h3>
+<p>​        dnn是opencv中的深度神经网络模块，支持运行网络，但是不支持训练，实现图像场景中的图像分类，图像检测和图像分割，并且支持主流的深度学习框架。</p>
+<h3 id="dnn尝试">dnn尝试</h3>
+<p>​       最近一端时间尝试了tensorflow,darknet还有caffe。调通了darknet的yolov3还有caffe的ssd_mobilnet检测网络，但是都是基于cpu的，所以速度可想而知，yolov3速度大约在1~2fps，ssd-mobilnet大约在9fps。</p>
+<p>​      googlenet模型是从caffe官方github仓库里面下的，从网上下载了一张雨伞图片，测试还可可以，准确率蛮高的。</p>
+<h3 id="资料来源">资料来源</h3>
+<p>​      代码主要是在github上，还有各个博客上找的。其实opencv也提供了相关demo，网上的代码也是基于demo改的，安装完opencv之后，在source/samples/dnn里面提供了相关代码，可以参考。</p>
+<h3 id="问题记录">问题记录</h3>
+<ul>
+<li>首先是tensorflow下的ssd网络，如果调用opencv里面的权重是可以跑通的，但是自己生成的却不行，但是网上有大佬用自己训练的模型跑通了。</li>
+<li>使用opencl加速，代码里有一个参数可以进行加速，但是使用之后就报错，从网上查了一下
+<ul>
+<li>opencv对显卡支持不好 -- github opencv issue</li>
+<li>opencv只支持intel显卡-- 这个是前几年的文章看见的，现在支持了。</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结">总结</h3>
+<ul>
+<li>个人感觉darknet是用c写的，caffe用c++写的，比较容易调通，调用过程基本上没有遇到困难，但是tensorflow和pytorch使用python写的，调用却不太顺利，是不是和语言有关系呢？</li>
+<li>dnn模块软肋
+<ul>
+<li>只支持部分网络</li>
+<li>gpu加速还是个问题，可能还不太成熟吧，博客上看见的也是用cpu调通的，但是速度这么慢，落地不行呀。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-c++">##caffe-ssd mobilnet opencv3.4.1
+
+#include&lt;iostream&gt;
+#include&lt;opencv2/opencv.hpp&gt;
+#include&lt;opencv2/dnn.hpp&gt;
+using namespace std;
+using namespace cv;
+using namespace cv::dnn;
+class Object
+{
+public:
+	Object();
+	Object(int index, float confidence, String name, Rect rect);
+	~Object();
+public:
+	int index;
+	String name;
+	float confidence;
+	Rect rect;
+private:
+};
+Object::Object() {
+}
+Object::Object(int index, float confidence, String name, Rect rect) {
+	this-&gt;index = index;
+	this-&gt;confidence = confidence;
+	this-&gt;name = name;
+	this-&gt;rect = rect;
+}
+Object::~Object() {
+}
+//----------------------------全局常量----------------------------------
+//配置好protxt文件，网络结构描述文件
+//配置好caffemodel文件，训练好的网络权重
+const String PROTOTX_FILE = &quot;no_bn.prototxt&quot;;
+const String CAFFE_MODEL_FILE = &quot;no_bn.caffemodel&quot;;
+const String classNames[] = { &quot;background&quot;, &quot;jingling&quot;, &quot;t16&quot;, &quot;xiao_spark&quot;, &quot;yu_mavic&quot;};
+const float CONF_THRESH = 0.5;
+int main() {
+	//------------------------实例化网络----------------------------
+	Net mobileNetSSD = readNetFromCaffe(PROTOTX_FILE, CAFFE_MODEL_FILE);
+	if (mobileNetSSD.empty()) {
+		cerr &lt;&lt; &quot;加载网络失败！&quot; &lt;&lt; endl;
+		return -1;
+	}
+	TickMeter t;
+	VideoCapture video;
+	video.open(&quot;scr.mp4&quot;);
+	
+	Mat srcImg;
+	video &gt;&gt; srcImg;
+	while (!srcImg.empty())
+	{
+		clock_t start_time,end_time;
+		start_time = clock();
+		//----------------------设置网络输入-----------------------
+		//将二维图像转换为CNN输入的张量Tensor,作为网络的输入
+		mobileNetSSD.setInput(blobFromImage(srcImg, 1.0 / 127.5, Size(300, 300), Scalar(127.5, 127.5, 127.5), true, false));
+		t.start();
+		//--------------------CNN网络前向计算----------------------
+		Mat netOut = mobileNetSSD.forward();
+		t.stop();
+		//----------------------解析计算结果-----------------------
+		vector&lt;Object&gt; detectObjects;
+		Mat detectionResult(netOut.size[2], netOut.size[3], CV_32F, netOut.ptr&lt;float&gt;());
+		for (int i = 0; i &lt; detectionResult.rows; i++) {
+			//目标类别的索引
+			int objectIndex = detectionResult.at&lt;float&gt;(i, 1);
+			//检测结果置信度
+			float confidence = detectionResult.at&lt;float&gt;(i, 2);
+			//根据置信度阈值过滤掉置信度较小的目标
+			if (confidence&lt;CONF_THRESH) {
+				continue;
+			}
+			//反归一化，得到图像坐标
+			int xLeftUp = static_cast&lt;int&gt;(detectionResult.at&lt;float&gt;(i, 3)*srcImg.cols);
+			int yLeftUp = static_cast&lt;int&gt;(detectionResult.at&lt;float&gt;(i, 4)*srcImg.rows);
+			int xRightBottom = static_cast&lt;int&gt;(detectionResult.at&lt;float&gt;(i, 5)*srcImg.cols);
+			int yRightBottom = static_cast&lt;int&gt;(detectionResult.at&lt;float&gt;(i, 6)*srcImg.rows);
+			//矩形框
+			Rect rect(Point{ xLeftUp,yLeftUp }, Point{ xRightBottom,yRightBottom });
+			//保存结果
+			detectObjects.push_back(Object{ objectIndex,confidence,classNames[objectIndex],rect });
+		}
+		//------------------------显示结果-----------------------------------
+		int count = 0;
+		for (auto&amp; i : detectObjects) {
+			rectangle(srcImg, i.rect, Scalar(0, 255, 255), 2);
+			putText(srcImg, i.name, i.rect.tl(), 1, 1.8, Scalar(255, 0, 0), 2);
+			cout &lt;&lt; &quot;第&quot; &lt;&lt; count &lt;&lt; &quot;个目标：&quot; &lt;&lt; i.name &lt;&lt; &quot;\t&quot; &lt;&lt; i.rect &lt;&lt; &quot;\t&quot; &lt;&lt; i.confidence &lt;&lt; endl;
+			count++;
+		}
+
+
+		end_time = clock();
+		imshow(&quot;MobileNet-SSD&quot;, srcImg);
+		waitKey(10);
+		cout &lt;&lt; &quot;FPS:&quot; &lt;&lt; CLOCKS_PER_SEC/(double)(end_time - start_time)  &lt;&lt; endl;
+		video &gt;&gt; srcImg;
+	}
+
+
+	waitKey(0);
+}
+
+</code></pre>
+<pre><code class="language-c++">### opencv4.1 darknet-yolov3
+#include &lt;opencv2/opencv.hpp&gt;
+#include &lt;opencv2/dnn.hpp&gt;
+
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+using namespace cv;
+using namespace cv::dnn;
+void image_detection();
+void video_detection();
+float confidenceThreshold = 0.25;
+String yolo_cfg = &quot;yolov3-voc.cfg&quot;;
+String yolo_model = &quot;yolov3-voc_f.weights&quot;;
+
+int main(int argc, char** argv)
+{
+	//image_detection();
+	video_detection();
+}
+
+void image_detection() {
+	Net net = readNetFromDarknet(yolo_cfg, yolo_model);
+	net.setPreferableBackend(DNN_BACKEND_OPENCV);
+	net.setPreferableTarget(DNN_TARGET_CPU);
+	//net.setPreferableBackend(DNN_BACKEND_OPENCV);       //启动GPU加速
+	//net.setPreferableTarget(DNN_TARGET_OPENCL);         //启动GPU加速
+	std::vector&lt;String&gt; outNames = net.getUnconnectedOutLayersNames();
+	for (int i = 0; i &lt; outNames.size(); i++) {
+		printf(&quot;output layer name : %s\n&quot;, outNames[i].c_str());
+	}
+
+
+	vector&lt;string&gt; classNamesVec;
+	//ifstream classNamesFile(&quot;object_detection_classes_yolov3.txt&quot;);
+	ifstream classNamesFile(&quot;myData.names&quot;);
+	if (classNamesFile.is_open())
+	{
+		string className = &quot;&quot;;
+		while (std::getline(classNamesFile, className))
+			classNamesVec.push_back(className);
+
+	}
+	clock_t start_time;
+	start_time = clock();
+	// 加载图像 
+	Mat frame = imread(&quot;scr.jpg&quot;);
+	//Mat frame = imread(&quot;cat.jpg&quot;);
+	Mat inputBlob = blobFromImage(frame, 1 / 255.F, Size(416, 416), Scalar(), true, false);
+	net.setInput(inputBlob);
+
+	// 检测
+	std::vector&lt;Mat&gt; outs;
+	net.forward(outs, outNames);
+	vector&lt;double&gt; layersTimings;
+	double freq = getTickFrequency() / 1000;
+	double time = net.getPerfProfile(layersTimings) / freq;
+	ostringstream ss;
+	cout &lt;&lt; &quot;detection time: &quot; &lt;&lt; time &lt;&lt; &quot; ms&quot;;
+	//putText(frame, ss.str(), Point(20, 20), 0, 0.5, Scalar(0, 0, 255));
+	vector&lt;Rect&gt; boxes;
+	vector&lt;int&gt; classIds;
+	vector&lt;float&gt; confidences;
+	for (size_t i = 0; i&lt;outs.size(); ++i)
+	{
+		// Network produces output blob with a shape NxC where N is a number of
+		// detected objects and C is a number of classes + 4 where the first 4
+		// numbers are [center_x, center_y, width, height]
+		float* data = (float*)outs[i].data;
+		for (int j = 0; j &lt; outs[i].rows; ++j, data += outs[i].cols)
+		{
+			Mat scores = outs[i].row(j).colRange(5, outs[i].cols);
+			Point classIdPoint;
+			double confidence;
+			minMaxLoc(scores, 0, &amp;confidence, 0, &amp;classIdPoint);
+			if (confidence &gt; confidenceThreshold)
+			{
+				int centerX = (int)(data[0] * frame.cols);
+				int centerY = (int)(data[1] * frame.rows);
+				int width = (int)(data[2] * frame.cols);
+				int height = (int)(data[3] * frame.rows);
+				int left = centerX - width / 2;
+				int top = centerY - height / 2;
+
+				classIds.push_back(classIdPoint.x);
+				confidences.push_back((float)confidence);
+				boxes.push_back(Rect(left, top, width, height));
+			}
+		}
+	}
+
+	vector&lt;int&gt; indices;
+	NMSBoxes(boxes, confidences, 0.5, 0.2, indices);
+	for (size_t i = 0; i &lt; indices.size(); ++i)
+	{
+		int idx = indices[i];
+		Rect box = boxes[idx];
+		String className = classNamesVec[classIds[idx]] ;
+		putText(frame, className.c_str(), box.tl(), FONT_HERSHEY_SIMPLEX, 1, Scalar(255, 0, 0), 2, 8);
+		rectangle(frame, box, Scalar(0, 0, 255), 2, 8, 0);
+	}
+	cout &lt;&lt;&quot;运行时间：&quot; &lt;&lt; ((double)(clock() - start_time) / CLOCKS_PER_SEC) * 1000 &lt;&lt; &quot;ms&quot; &lt;&lt; &quot;\n&quot; &lt;&lt; endl;
+	imshow(&quot;YOLOv3-Detections&quot;, frame);
+	waitKey(0);
+	return;
+}
+
+void video_detection() {
+
+	Net net = readNetFromDarknet(yolo_cfg, yolo_model);
+	net.setPreferableBackend(DNN_BACKEND_OPENCV);
+	net.setPreferableTarget(DNN_TARGET_CPU);
+	//net.setPreferableBackend(DNN_BACKEND_OPENCV);       //启动GPU加速
+	//net.setPreferableTarget(DNN_TARGET_OPENCL);         //启动GPU加速
+	if (net.empty())
+	{
+		printf(&quot;Could not load net...\n&quot;);
+		return;
+	}
+	std::vector&lt;String&gt; outNames = net.getUnconnectedOutLayersNames();
+	for (int i = 0; i &lt; outNames.size(); i++) {
+		printf(&quot;output layer name : %s\n&quot;, outNames[i].c_str());
+	}
+	vector&lt;string&gt; classNamesVec;
+	ifstream classNamesFile(&quot;myData.names&quot;);
+	if (classNamesFile.is_open())
+	{
+		string className = &quot;&quot;;
+		while (std::getline(classNamesFile, className))
+			classNamesVec.push_back(className);
+	}
+
+	VideoCapture video_read;
+	video_read.open(&quot;scr2.mp4&quot;);
+	Mat frame;
+	video_read &gt;&gt; frame;
+	/*
+	VideoCapture capture;
+	capture.open(&quot;D:/vcprojects/images/fbb.avi&quot;);
+	if (!capture.isOpened()) {
+		printf(&quot;could not open the camera...\n&quot;);
+		return;
+	}
+	*/
+
+	while (!frame.empty())
+	{
+		//加载图像
+		//if (frame.empty())
+		//	if (frame.channels() == 4)
+		//		cvtColor(frame, frame, COLOR_BGRA2BGR);
+		Mat inputBlob = blobFromImage(frame, 1 / 255.F, Size(416, 416), Scalar(), true, false);
+		net.setInput(inputBlob, &quot;data&quot;);
+		
+	
+
+
+		//Mat detectionMat = net.forward(&quot;detection_out&quot;);
+		//vector&lt;double&gt; layersTimings;
+		//double freq = getTickFrequency() / 1000;
+		//double time = net.getPerfProfile(layersTimings) / freq;
+		//ostringstream ss;
+		//ss &lt;&lt; &quot;FPS: &quot; &lt;&lt; 1000 / time &lt;&lt; &quot; ; time: &quot; &lt;&lt; time &lt;&lt; &quot; ms&quot;;
+		//putText(frame, ss.str(), Point(20, 20), 0, 0.5, Scalar(0, 0, 255));
+
+
+		// 检测
+		std::vector&lt;Mat&gt; outs;
+		net.forward(outs, outNames);
+		vector&lt;double&gt; layersTimings;
+		double freq = getTickFrequency() / 1000;
+		double time = net.getPerfProfile(layersTimings) / freq;
+		ostringstream ss;
+		ss &lt;&lt; &quot;detection time: &quot; &lt;&lt; time &lt;&lt; &quot; ms&quot;;
+		putText(frame, ss.str(), Point(20, 20), 0, 0.5, Scalar(0, 0, 255));
+		vector&lt;Rect&gt; boxes;
+		vector&lt;int&gt; classIds;
+		vector&lt;float&gt; confidences;
+
+		for (size_t i = 0; i &lt; outs.size(); ++i)
+		{
+			// Network produces output blob with a shape NxC where N is a number of
+			// detected objects and C is a number of classes + 4 where the first 4
+			// numbers are [center_x, center_y, width, height]
+			float* data = (float*)outs[i].data;
+			for (int j = 0; j &lt; outs[i].rows; ++j, data += outs[i].cols)
+			{
+				Mat scores = outs[i].row(j).colRange(5, outs[i].cols);
+				Point classIdPoint;
+				double confidence;
+				minMaxLoc(scores, 0, &amp;confidence, 0, &amp;classIdPoint);
+				if (confidence &gt; confidenceThreshold)
+				{
+					int centerX = (int)(data[0] * frame.cols);
+					int centerY = (int)(data[1] * frame.rows);
+					int width = (int)(data[2] * frame.cols);
+					int height = (int)(data[3] * frame.rows);
+					int left = centerX - width / 2;
+					int top = centerY - height / 2;
+
+					classIds.push_back(classIdPoint.x);
+					confidences.push_back((float)confidence);
+					boxes.push_back(Rect(left, top, width, height));
+				}
+			}
+		}
+
+		vector&lt;int&gt; indices;
+		NMSBoxes(boxes, confidences, 0.5, 0.2, indices);
+		for (size_t i = 0; i &lt; indices.size(); ++i)
+		{
+			int idx = indices[i];
+			Rect box = boxes[idx];
+			String className = classNamesVec[classIds[idx]] + std::to_string(confidences[idx]);
+			putText(frame, className.c_str(), box.tl(), FONT_HERSHEY_SIMPLEX, 1, Scalar(255, 0, 0), 2, 8);
+			rectangle(frame, box, Scalar(0, 0, 255), 2, 8, 0);
+		}
+
+		/*for (int i = 0; i &lt; detectionMat.rows; i++)
+		{
+			const int probability_index = 5;
+			const int probability_size = detectionMat.cols - probability_index;
+			float *prob_array_ptr = &amp;detectionMat.at&lt;float&gt;(i, probability_index);
+			size_t objectClass = max_element(prob_array_ptr, prob_array_ptr + probability_size) - prob_array_ptr;
+			float confidence = detectionMat.at&lt;float&gt;(i, (int)objectClass + probability_index);
+			if (confidence &gt; confidenceThreshold)
+			{
+				float x = detectionMat.at&lt;float&gt;(i, 0);
+				float y = detectionMat.at&lt;float&gt;(i, 1);
+				float width = detectionMat.at&lt;float&gt;(i, 2);
+				float height = detectionMat.at&lt;float&gt;(i, 3);
+				int xLeftBottom = static_cast&lt;int&gt;((x - width / 2) * frame.cols);
+				int yLeftBottom = static_cast&lt;int&gt;((y - height / 2) * frame.rows);
+				int xRightTop = static_cast&lt;int&gt;((x + width / 2) * frame.cols);
+				int yRightTop = static_cast&lt;int&gt;((y + height / 2) * frame.rows);
+				Rect object(xLeftBottom, yLeftBottom,
+					xRightTop - xLeftBottom,
+					yRightTop - yLeftBottom);
+				rectangle(frame, object, Scalar(0, 255, 0));
+				if (objectClass &lt; classNamesVec.size())
+				{
+					ss.str(&quot;&quot;);
+					ss &lt;&lt; confidence;
+					String conf(ss.str());
+					String label = String(classNamesVec[objectClass]) + &quot;: &quot; + conf;
+					int baseLine = 0;
+					Size labelSize = getTextSize(label, FONT_HERSHEY_SIMPLEX, 0.5, 1, &amp;baseLine);
+					rectangle(frame, Rect(Point(xLeftBottom, yLeftBottom),
+						Size(labelSize.width, labelSize.height + baseLine)),
+						Scalar(255, 255, 255), -1);
+					putText(frame, label, Point(xLeftBottom, yLeftBottom + labelSize.height),
+						FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 0, 0));
+				}
+			}
+		}*/
+		imshow(&quot;YOLOv3: Detections&quot;, frame);
+		video_read &gt;&gt; frame;
+		if (waitKey(1) &gt;= 0) break;
+	}
+}
+</code></pre>
+<pre><code class="language-c++">#opencv3.4.1 caffe googlenet 
+#include&lt;opencv2\opencv.hpp&gt;
+#include&lt;vector&gt;
+#include&lt;string&gt;
+
+using namespace cv;
+using namespace dnn;
+using namespace std;
+
+String model_file = &quot;bvlc_googlenet.caffemodel&quot;;
+String model_txtfile = &quot;deploy.prototxt&quot;;
+String labels_file = &quot;synset_words.txt&quot;;
+
+vector&lt;String&gt;readLabels();
+
+
+
+int main(int arc, char** argv) {
+
+	Mat src = imread(&quot;scr1.jpg&quot;);
+	namedWindow(&quot;input&quot;, CV_WINDOW_AUTOSIZE);
+	imshow(&quot;input&quot;, src);
+
+	//¶ÁÈ¡Ä£ÐÍµÄÀà±ð£šÎÄ±Ÿ£©
+	vector&lt;String&gt; labels = readLabels();
+
+
+	//¶ÁÈ¡google_netµÄÄ£ÐÍºÍÃèÊöÎÄŒþ
+	Net net = readNetFromCaffe(model_txtfile, model_file);
+	if (net.empty()) {
+
+		printf(&quot;read caffee model data failure\n&quot;);
+
+		return -1;
+
+	}
+
+	//œ«ÍŒÏñ×ªÎªgoogle_netÍøÂçÊäÈëµÄ¶ÔÏó£¬ÓÉÃèÊöÎÄŒþ¿ÉÖª£¬ÍŒÏñ³ßŽçÍ³Ò»Îª224*224
+	Mat inputBlob = blobFromImage(src, 1.0, Size(224, 224), Scalar(104, 117, 123));
+	//œøÐÐÇ°ÏòŽ«²¥£¬ÓÉÃèÊöÎÄŒþ¿ÉÖª£¬µÚÒ»²ãÓÃÁË10žöŸí»ý²ã£¬ÌáÈ¡ÍŒÏñ10ÖÖ²»Í¬µÄÌØÕ÷
+	Mat prob;
+
+	for (int i = 0; i &lt; 10; i++) {
+		net.setInput(inputBlob, &quot;data&quot;);
+		prob = net.forward(&quot;prob&quot;);//×îºóÒ»²ãµÄÊä³öÎª¡°prob¡±
+	}
+
+
+	//Êä³ö
+	//µÃµœµÄžÅÂÊÖµÎª1ÐÐ1000ÁÐµÄ
+	Mat promat = prob.reshape(1, 1);
+	Point classLoc;
+	double classProb;
+	minMaxLoc(promat, NULL, &amp;classProb, NULL, &amp;classLoc);
+	printf(&quot;current image classification: %s,probablity %f\n&quot;, labels.at(classLoc.x).c_str(), classProb);
+
+	putText(src, labels.at(classLoc.x), Point(20, 20), FONT_HERSHEY_COMPLEX, 1.0, Scalar(0, 0, 255), 2);
+
+	imshow(&quot;output&quot;, src);
+
+	waitKey(0);
+
+	return 0;
+
+}
+
+
+
+//¶ÁÈ¡Ä£ÐÍµÄÀà±ð£šÎÄ±Ÿ£©
+
+vector&lt;String&gt;readLabels() {
+	vector&lt;String&gt;classNames;
+	ifstream fp(labels_file);//Žò¿ªÎÄŒþ
+	if (!fp.is_open()) {//ÎÄŒþÃ»Žò¿ª
+		printf(&quot;could not open the file &quot;);
+		exit(-1);
+	}
+
+	string name;
+
+	while (!fp.eof()) {//ÎÄŒþÃ»¶ÁµœœáÎ²
+		getline(fp, name);//µÃµœÃ¿Ò»ÐÐ£¬·ÅµœnameÖÐ
+		if (name.length()) {//·Ç¿ÕÐÐ
+			classNames.push_back(name.substr(name.find(' ') + 1));//
+		}
+	}
+
+	fp.close();
+	return classNames;
+
+}
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+    
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://bixiaopeng0.github.io/post/linux-huan-jing-pei-zhi1">
+              <h3 class="post-title">
+                linux环境配置
+              </h3>
+            </a>
+          </div>  
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://bixiaopeng0.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
