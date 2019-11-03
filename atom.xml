@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io</id>
     <title>晓鹏博客</title>
-    <updated>2019-10-15T12:09:55.365Z</updated>
+    <updated>2019-11-03T13:11:09.142Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io"/>
     <link rel="self" href="https://bixiaopeng0.github.io/atom.xml"/>
@@ -1068,6 +1068,13 @@ git push origin master #将仓库去的内容推送到GitHub上
 </code></pre>
 </li>
 <li>
+<p>删除文件</p>
+<pre><code class="language-python">git rm -r --cached target  删除target文件夹
+git commit -m '删除了target' 
+git push -u origin master 将本次更改更新到github项目上去
+</code></pre>
+</li>
+<li>
 <p>创建一个新的仓库</p>
 <pre><code class="language-python">git init
 git add README.md
@@ -1077,7 +1084,7 @@ git push -u origin master
 </code></pre>
 </li>
 </ul>
-<p>time:2019/9/11</p>
+<p>time:2019/11/03</p>
 <hr>
 <p>后续。。。。</p>
 ]]></content>
