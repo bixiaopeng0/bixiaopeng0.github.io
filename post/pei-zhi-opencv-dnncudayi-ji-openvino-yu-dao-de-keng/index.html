@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>搜索技巧 | 晓鹏博客</title>
+<title>配置opencv dnn（cuda）以及openvino遇到的坑 | 晓鹏博客</title>
 <link rel="shortcut icon" href="https://bixiaopeng0.github.io/favicon.ico?v=1578313211526">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -74,38 +74,51 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              搜索技巧
+              配置opencv dnn（cuda）以及openvino遇到的坑
             </h2>
             <div class="post-info">
               <time class="post-time">
-                · 2018-07-31 ·
+                · 2020-01-06 ·
               </time>
               
-                <a href="https://bixiaopeng0.github.io/tag/3cgtua9uh" class="post-tags">
-                  # 工具
+                <a href="https://bixiaopeng0.github.io/tag/4V1Lx1Anu" class="post-tags">
+                  # opencv
                 </a>
               
             </div>
             
-              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io/post-images/sou-suo-ji-qiao.jpg')">
+              <div class="post-feature-image" style="background-image: url('https://bixiaopeng0.github.io/post-images/pei-zhi-opencv-dnncudayi-ji-openvino-yu-dao-de-keng.jpeg')">
               </div>
             
             <div class="post-content">
-              <h2 id="双引号完全匹配">双引号完全匹配</h2>
-<p>​	在关键词上加上双引号，这样搜素引擎只返回和关键词完全符合的搜素结果。</p>
-<!--more-->
-<figure data-type="image" tabindex="1"><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/shuang.png" alt=""></figure>
-<h2 id="排除关键词">排除关键词</h2>
-<p>​	如果搜素的部分内容不是自己想要的结果，可以使用 - 排除制定内容。使用形式：A -B 注意A后面的空格不能去掉，B紧跟减号。</p>
-<figure data-type="image" tabindex="2"><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/-.png" alt=""></figure>
-<h2 id="在指定网站内搜素">在指定网站内搜素</h2>
-<p>​	在输入框内输入site:网址 关键字 就在在输入的网址内进行关键字搜素。</p>
-<figure data-type="image" tabindex="3"><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/site.png" alt=""></figure>
-<h2 id="搜素指定格式的文件">搜素指定格式的文件</h2>
-<p>​	这个在下载电子书时，还是蛮重要的。在输入框键入filetype:文件格式 输入关键词后，搜素结果只会显示指定格式的文件。另外，用谷歌搜素外网电子书真的是好用。</p>
-<figure data-type="image" tabindex="4"><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype.png" alt=""></figure>
-<figure data-type="image" tabindex="5"><img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/find/filetype1.png" alt=""></figure>
-<p>另外上述搜素技巧可以组合使用哟。</p>
+              <!--more-->!
+<p>配置openvino遇到的坑</p>
+<p>1、第一次下载的R1,0但是检测不到python,后来下载R3.1解决问题<br>
+2、编译build_saples_msvc报错<br>
+将一下内容设置为<br>
+set MSBUILD_BIN=C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe<br>
+set VS_PATH=<br>
+set VS_VERSION=2015<br>
+添加<br>
+set MSBUILD_VERSION=14 2015<br>
+set PLATFORM=x64</p>
+<p>3、opencv编译报错<br>
+重新编译opencv 添加IE库</p>
+<p>4、cmake情况下会出现下载失败，先从日记里面把安装包下载好，然后在进行config</p>
+<p>配置dnn——cuda</p>
+<p>1、 使用环境</p>
+<p>（1）Cuda10.0</p>
+<p>（2）Cudnn7.5及以上（和cuda版本兼容）</p>
+<p>（3）Vs版本：2017（2015经测试，编译失败）</p>
+<p>（4）Cmake</p>
+<p>2、 配置步骤</p>
+<p>（1） 选择源码路径，然后config，见图一</p>
+<p>（2） 勾选build_opencv_world, opencv_dnn_cuda with_cuda,将解压好的opencv_contribe的module路径添加进来，注contribe可以在github上下载最新的，见图二,三,四</p>
+<p>（3） 第二次config，部分文件可能会下载失败，可以手动下载，放到指定文件夹下即可，从nvidia官网查找本机显卡算力，然后在cuda_arch_bin中保留本机显卡算力，删除其他，然后勾选cuda_fast_math,第三次configure  见图五</p>
+<p>（4） Configure完成之后，从日记查看是否检测到本机的cuda和cudnn，如果检测到点击generate，见图六</p>
+<p>（5） 打开vs工程，在release模型下点击ALL_BUILD，生成之后，右击INSTALL-&gt;仅用于项目-&gt;仅生成INSTALL</p>
+<p>（6） 配置好opencv的环境，在代码里使用指定参数，即可调用cuda 见图七</p>
+<p>图片是懒得传上图床了。。。。</p>
 
             </div>
           </article>
@@ -114,9 +127,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://bixiaopeng0.github.io/post/2018-dian-sai-cheng-xu-shi-xian-dian-liu-xin-hao-jian-ce-zhuang-zhi">
+            <a href="https://bixiaopeng0.github.io/post/opencv-dnn-mo-kuai">
               <h3 class="post-title">
-                2018电赛程序实现---电流信号检测装置
+                opencv dnn模块
               </h3>
             </a>
           </div>  

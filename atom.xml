@@ -2,14 +2,50 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io</id>
     <title>晓鹏博客</title>
-    <updated>2019-11-03T13:11:09.142Z</updated>
+    <updated>2020-01-06T12:20:16.658Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io"/>
     <link rel="self" href="https://bixiaopeng0.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://bixiaopeng0.github.io/images/avatar.png</logo>
     <icon>https://bixiaopeng0.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, 晓鹏博客</rights>
+    <rights>All rights reserved 2020, 晓鹏博客</rights>
+    <entry>
+        <title type="html"><![CDATA[配置opencv dnn（cuda）以及openvino遇到的坑]]></title>
+        <id>https://bixiaopeng0.github.io/post/pei-zhi-opencv-dnncudayi-ji-openvino-yu-dao-de-keng</id>
+        <link href="https://bixiaopeng0.github.io/post/pei-zhi-opencv-dnncudayi-ji-openvino-yu-dao-de-keng">
+        </link>
+        <updated>2020-01-06T12:15:48.000Z</updated>
+        <content type="html"><![CDATA[<!--more-->!
+<p>配置openvino遇到的坑</p>
+<p>1、第一次下载的R1,0但是检测不到python,后来下载R3.1解决问题<br>
+2、编译build_saples_msvc报错<br>
+将一下内容设置为<br>
+set MSBUILD_BIN=C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe<br>
+set VS_PATH=<br>
+set VS_VERSION=2015<br>
+添加<br>
+set MSBUILD_VERSION=14 2015<br>
+set PLATFORM=x64</p>
+<p>3、opencv编译报错<br>
+重新编译opencv 添加IE库</p>
+<p>4、cmake情况下会出现下载失败，先从日记里面把安装包下载好，然后在进行config</p>
+<p>配置dnn——cuda</p>
+<p>1、 使用环境</p>
+<p>（1）Cuda10.0</p>
+<p>（2）Cudnn7.5及以上（和cuda版本兼容）</p>
+<p>（3）Vs版本：2017（2015经测试，编译失败）</p>
+<p>（4）Cmake</p>
+<p>2、 配置步骤</p>
+<p>（1） 选择源码路径，然后config，见图一</p>
+<p>（2） 勾选build_opencv_world, opencv_dnn_cuda with_cuda,将解压好的opencv_contribe的module路径添加进来，注contribe可以在github上下载最新的，见图二,三,四</p>
+<p>（3） 第二次config，部分文件可能会下载失败，可以手动下载，放到指定文件夹下即可，从nvidia官网查找本机显卡算力，然后在cuda_arch_bin中保留本机显卡算力，删除其他，然后勾选cuda_fast_math,第三次configure  见图五</p>
+<p>（4） Configure完成之后，从日记查看是否检测到本机的cuda和cudnn，如果检测到点击generate，见图六</p>
+<p>（5） 打开vs工程，在release模型下点击ALL_BUILD，生成之后，右击INSTALL-&gt;仅用于项目-&gt;仅生成INSTALL</p>
+<p>（6） 配置好opencv的环境，在代码里使用指定参数，即可调用cuda 见图七</p>
+<p>图片是懒得传上图床了。。。。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[opencv dnn模块]]></title>
         <id>https://bixiaopeng0.github.io/post/opencv-dnn-mo-kuai</id>
@@ -626,8 +662,8 @@ sudo gedit pycharm.desktop
 Version=1.0<br>
 Type=Application<br>
 Name=Pycharm<br>
-Icon=/home/mengdan/Downloads/pycharm-2018.2.1/bin/pycharm.png<br>
-Exec=sh /home/mengdan/Downloads/pycharm-2018.2.1/bin/pycharm.sh<br>
+Icon=/home/bi/Downloads/pycharm-community-2019.2.2/bin/pycharm.png<br>
+Exec=sh /home/bi/Downloads/pycharm-community-2019.2.2/bin/pycharm.sh<br>
 MimeType=application/x-py;<br>
 Name[en_US]=pycharm</p>
 <ul>
