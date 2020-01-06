@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>2018电赛程序实现---电流信号检测装置 | 晓鹏博客</title>
-<link rel="shortcut icon" href="https://bixiaopeng0.github.io/favicon.ico?v=1578313272072">
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io/favicon.ico?v=1578313439062">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://bixiaopeng0.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://bixiaopeng0.github.io">
-  <img class="avatar" src="https://bixiaopeng0.github.io/images/avatar.png?v=1578313272072" alt="">
+  <img class="avatar" src="https://bixiaopeng0.github.io/images/avatar.png?v=1578313439062" alt="">
   </a>
   <h1 class="site-title">
     晓鹏博客
@@ -94,7 +94,7 @@
               <p>​	把程序主要分为三个部分，第一个部分是vga显示，第二个部分是ad7106的驱动程序，第三个部分是fft程序</p>
 <!--more-->
 <h2 id="vga显示">vga显示</h2>
-<p>​	vga显示这部分是我队友写的，主要功能显示输入信号的频谱和正弦信号的频率，非正弦信号的谐波幅值，其实这个频谱是经过处理之后显示的，如果输入的是单一频率的正弦波，那么只显示一根谱线，假设输入的是谐波，那么只显示谐波对应频率下的谱线，本来是想把所有的频谱给显示出来的，但是由于vga分辨率是1440X900,fft变化点数是8000个点，屏幕分辨率不够，所以当时没有全部显示，显示效果下图所示：<img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/IMG_20180727_142329.jpg" alt=""></p>
+<p>​	vga显示这部分是我队友写的，主要功能显示输入信号的频谱和正弦信号的频率，非正弦信号的谐波幅值，其实这个频谱是经过处理之后显示的，如果输入的是单一频率的正弦波，那么只显示一根谱线，假设输入的是谐波，那么只显示谐波对应频率下的谱线，本来是想把所有的频谱给显示出来的，但是由于vga分辨率是1440X900,fft变化点数是8000个点，屏幕分辨率不够，所以当时没有全部显示，显示效果下图所示：<img src="https://picture-1257139399.cos.ap-chengdu.myqcloud.com/picture/IMG_20180727_142329.jpg" alt="" loading="lazy"></p>
 <h2 id="ad7606驱动">AD7606驱动</h2>
 <p>​	我们一开始采用的是ads828这个10bit70M采样率，但是这款ad有两个问题，测量10mv的信号时准确度低，原因在于利用的有效位少了，这个当时我们想了两种解决思路，第一种是100MA<sub>1A的电流直接经过ad处理，10ma</sub>100ma的电流先经过放大，然后再经过ad处理，这样ad的有效数据位就利用了起来。第二种方案是采用精度更高的ad，我们最后是采用的第二种思路。另一个是这个ad828在硬件设计是加入了运算放大器，导致他的输入电压和输出值并不是线性关系，不过这个可以通过软件补偿进行弥补，先测试100组数据，然后再通过线性拟合补偿。</p>
 <p>​	ad7606采用的是spi接口，当时是老师帮我们从网上下载了一份verilog程序，结果还挺好用的，节省了大量的调试时间。</p>
