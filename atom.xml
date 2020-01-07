@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io</id>
     <title>晓鹏博客</title>
-    <updated>2020-01-06T12:37:55.823Z</updated>
+    <updated>2020-01-07T07:59:39.526Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io"/>
     <link rel="self" href="https://bixiaopeng0.github.io/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>https://bixiaopeng0.github.io/images/avatar.png</logo>
     <icon>https://bixiaopeng0.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 晓鹏博客</rights>
+    <entry>
+        <title type="html"><![CDATA[pytorch优化器及学习率]]></title>
+        <id>https://bixiaopeng0.github.io/post/pytorch-you-hua-qi-ji-xue-xi-lu</id>
+        <link href="https://bixiaopeng0.github.io/post/pytorch-you-hua-qi-ji-xue-xi-lu">
+        </link>
+        <updated>2020-01-07T07:55:02.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="学习率衰减">学习率衰减</h3>
+<p>可以通过打印optimizer，查看里面的具体参数，网络各层的学习率，权重衰减。另外，学习率更新一般是一个epoch更新一次，所以要放在optimizer.step()的上一级。</p>
+<h4 id="steplr">StepLR</h4>
+<pre><code class="language-python">scheduler = lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.1)
+scheduler.step()  
+print(epoch, 'lr={:.6f}'.format(scheduler.get_lr()[0]))#查看学习率
+</code></pre>
+<p>for example</p>
+<p>0&lt;epoch&lt;30, lr = 0.05<br>
+30&lt;=epoch&lt;60, lr = 0.005<br>
+60&lt;=epoch&lt;90, lr = 0.0005</p>
+<h4 id="multisteplr">MultiStepLR</h4>
+<pre><code class="language-python">scheduler = lr_scheduler.MultiStepLR(optimizer, [30, 80], 0.1)#与StepLR相比，MultiStepLR可以设置指定的区间
+scheduler.step()  
+</code></pre>
+<h4 id="exponentiallr">ExponentialLR</h4>
+<pre><code class="language-python">scheduler = lr_scheduler.ExponentialLR(optimizer, gamma=0.9)
+scheduler.step()
+</code></pre>
+<h3 id="优化器">优化器</h3>
+<h4 id="adam">Adam</h4>
+<pre><code class="language-python">class torch.optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)
+#params(iterable)：可用于迭代优化的参数或者定义参数组的dicts。
+#lr (float, optional) ：学习率(默认: 1e-3)
+#betas (Tuple[float, float], optional)：用于计算梯度的平均和平方的系数(默认: (0.9, 0.999))
+#eps (float, optional)：为了提高数值稳定性而添加到分母的一个项(默认: 1e-8)
+#weight_decay (float, optional)：权重衰减(如L2惩罚)(默认: 0)
+</code></pre>
+<h4 id="sgd">SGD</h4>
+<pre><code class="language-python">optim.SGD(net.parameters(), lr=opt.lr, momentum=0.9,weight_decay=5e-4)
+
+</code></pre>
+<p>adam和加入动量的sgd中收敛结果一样，但是sgd动量为0的优化器收敛效果较差。<br>
+待续---------------time2020/1/7</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[配置opencv dnn（cuda）以及openvino遇到的坑]]></title>
         <id>https://bixiaopeng0.github.io/post/pei-zhi-opencv-dnncudayi-ji-openvino-yu-dao-de-keng</id>
