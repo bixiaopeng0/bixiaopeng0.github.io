@@ -4,7 +4,7 @@
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>常犯的错误 | 晓鹏博客</title>
-<link rel="shortcut icon" href="https://bixiaopeng0.github.io/favicon.ico?v=1578383952819">
+<link rel="shortcut icon" href="https://bixiaopeng0.github.io/favicon.ico?v=1578494374386">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://bixiaopeng0.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://bixiaopeng0.github.io">
-  <img class="avatar" src="https://bixiaopeng0.github.io/images/avatar.png?v=1578383952819" alt="">
+  <img class="avatar" src="https://bixiaopeng0.github.io/images/avatar.png?v=1578494374386" alt="">
   </a>
   <h1 class="site-title">
     晓鹏博客
@@ -87,7 +87,15 @@
               </div>
             
             <div class="post-content">
-              <h3 id="vs">vs</h3>
+              <hr>
+<p>title: '常犯的错误'<br>
+date: 2019-09-13 08:52:58<br>
+tags: []<br>
+published: true<br>
+hideInList: false<br>
+feature: /post-images/chang-fan-de-cuo-wu.jpg</p>
+<hr>
+<h3 id="vs">vs</h3>
 <ul>
 <li>今天在调无人机代码，提示类UAV不存在，但是在头文件中是有引用的，然后调了好长时间才发现两个类的头文件宏定义判断是一样的。</li>
 <li>代码比较多的时候。不要用using namespace,之前因为这个问题，opencv和windows的函数发生了冲突，然后一个一个的加上去的。</li>
@@ -99,7 +107,16 @@
 </ul>
 <h3 id="opencv">opencv</h3>
 <ul>
-<li>多人开发，opencv版本要一致，这个之前也被坑过</li>
+<li>
+<p>多人开发，opencv版本要一致，这个之前也被坑过</p>
+</li>
+<li>
+<p>今天在linux上配置opencv，搞了一天</p>
+<ul>
+<li>第一个错误是opencv在配置的时候，下载包失败，这个手动下载然后用cp放到指定目录即可。</li>
+<li>之前配置opencv3.4.5一直用的cmake3.10，然而我同学用的3.12配置成功了，怀疑可能是版本问题，结果真的是。</li>
+</ul>
+</li>
 </ul>
 
             </div>

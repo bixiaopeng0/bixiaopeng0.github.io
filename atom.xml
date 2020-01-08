@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bixiaopeng0.github.io</id>
     <title>晓鹏博客</title>
-    <updated>2020-01-07T07:59:39.526Z</updated>
+    <updated>2020-01-08T14:39:37.510Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://bixiaopeng0.github.io"/>
     <link rel="self" href="https://bixiaopeng0.github.io/atom.xml"/>
@@ -810,7 +810,15 @@ $ sudo ln -s g++-4.8 g++
         <link href="https://bixiaopeng0.github.io/post/chang-fan-de-cuo-wu">
         </link>
         <updated>2019-09-13T00:52:58.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="vs">vs</h3>
+        <content type="html"><![CDATA[<hr>
+<p>title: '常犯的错误'<br>
+date: 2019-09-13 08:52:58<br>
+tags: []<br>
+published: true<br>
+hideInList: false<br>
+feature: /post-images/chang-fan-de-cuo-wu.jpg</p>
+<hr>
+<h3 id="vs">vs</h3>
 <ul>
 <li>今天在调无人机代码，提示类UAV不存在，但是在头文件中是有引用的，然后调了好长时间才发现两个类的头文件宏定义判断是一样的。</li>
 <li>代码比较多的时候。不要用using namespace,之前因为这个问题，opencv和windows的函数发生了冲突，然后一个一个的加上去的。</li>
@@ -822,7 +830,16 @@ $ sudo ln -s g++-4.8 g++
 </ul>
 <h3 id="opencv">opencv</h3>
 <ul>
-<li>多人开发，opencv版本要一致，这个之前也被坑过</li>
+<li>
+<p>多人开发，opencv版本要一致，这个之前也被坑过</p>
+</li>
+<li>
+<p>今天在linux上配置opencv，搞了一天</p>
+<ul>
+<li>第一个错误是opencv在配置的时候，下载包失败，这个手动下载然后用cp放到指定目录即可。</li>
+<li>之前配置opencv3.4.5一直用的cmake3.10，然而我同学用的3.12配置成功了，怀疑可能是版本问题，结果真的是。</li>
+</ul>
+</li>
 </ul>
 ]]></content>
     </entry>
